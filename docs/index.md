@@ -4,7 +4,7 @@ layout: home
 hero:
   name: 风电数据分析教程
   text: 风机运行监测与性能评估
-  tagline: 用 SCADA 与现场测风数据分析机组运行、建立功率曲线并评估风场发电表现。
+  tagline: 从运行记录和公开案例入手，学习筛查变桨异常、对照测风和估算功率。
   image:
     src: /wind-field.webp
     alt: 田野中的风力发电机组

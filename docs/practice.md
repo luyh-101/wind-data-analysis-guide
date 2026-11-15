@@ -4,24 +4,22 @@
 import { withBase } from 'vitepress'
 </script>
 
-当散点图出现分层或出力偏离时，可用时序定位变化，再用控制记录核对。
-
 ## 控制表现与多信号复核
 
-相近风速下出现多条点带时，先按状态、功率设定和控制版本分组。用[三张散点图](/operations#三张散点图的联合判读)找出差异，再从同一时间轴回看运行量、指令和反馈。
+散点图能指出哪些变量一起变化。按时间戳对齐后，可以进一步定位变化开始的时刻、各信号变化的先后和持续时间。
 
 下图对齐 Aventa 在 2025 年 6 月 4 日的四路分钟信号，浅色标出连续正功率的窗口。
 
 <figure class="tutorial-figure">
   <a :href="withBase('/figures/aventa-synchronized-signals.png')" target="_blank" rel="noopener"><img src="/figures/aventa-synchronized-signals.png" width="1050" height="990" loading="lazy" alt="Aventa 在 05:23 至 05:37 UTC 的四路同步时序。05:27 风速和转速上升、功率转正、桨距角下降，绿色条标出连续正功率窗口。" /></a>
-  <figcaption><strong>对齐风速、功率、转速与桨距角</strong> 从 05:27 UTC 起，几路信号在相邻分钟内一起变化。图中时段按功率标记，具体状态要回查控制器或事件记录。</figcaption>
+  <figcaption><strong>对齐风速、功率、转速与桨距角</strong> 从 05:27 UTC 起可定位到一段连续正功率窗口。图中是分钟记录，可读出窗口间的变化顺序，同一分钟内的动作先后需用更高频的记录。</figcaption>
 </figure>
 
 [Aventa 分钟运行数据](/data/aventa-linked-scatter.csv)
 
 ### 转速–扭矩与共振穿越 {#转速扭矩与共振穿越}
 
-在某些转速区间内，机组振动可能因共振增大。按机组资料确定区间，转速与扭矩取同一传动轴侧，例如都取发电机侧。
+在某些转速区间内，机组振动可能因共振增大。按机组资料确定区间，转速与扭矩取同一传动轴侧。
 
 1. **在散点图上找区间。** 横轴为转速，纵轴为扭矩，标出规定的区间并回查时间戳。
 2. **用时序识别穿越。** 从另一侧离开记为完整穿越，从同侧离开记为折返。停留时间等于退出时刻减进入时刻，短时穿越需要足够密的原始记录。
@@ -32,15 +30,7 @@ import { withBase } from 'vitepress'
   <figcaption><strong>转速区间的进入与退出</strong> 用相邻采样点估计边界时刻。本例区间内停留约 1.67 秒。</figcaption>
 </figure>
 
-::: details 穿越事件的识别与时间计算
-
-1. **划分连续片段。** 按机组和时间排序。遇到记录缺失、时间间隔超过允许值、工况切换或控制版本切换时断开。允许间隔应根据原始采样周期确定。按技术文件的转速下限和上限，把有效样本分为区间下方、区间内和区间上方，等于边界的样本计入区间内。
-2. **记录进入和退出。** 从某一侧进入区间时，记下进入侧及时间。回到同一侧记为折返，从另一侧离开记为完整穿越。片段开始或结束时已在区间内、途中发生中断，分别标记缺少进入或退出边界。相邻采样点直接从一侧跳到另一侧时，标记为“跨区、无区间内样本”，单列其时间分辨率。
-3. **计算停留时间。** 进入和退出的实际时刻各落在一对采样点之间。采样足够密且局部转速近似连续时，可在相邻点之间插值求过界时刻。完整穿越的时长为退出时刻减进入时刻。注明估计方法、采样间隔、方向和状态。
-
-:::
-
-变桨反馈迟滞时，可回查同期驱动电流、温度与告警。低出力事件的分段计量见[发电量损失与低效分析](/assessment#发电量损失与低效分析)。
+采样足够密且边界附近转速近似连续时，在跨越边界的两个相邻采样点之间作线性插值。缺失进入或退出边界的片段，以及直接从区间一侧跳到另一侧且没有区间内样本的片段，应单列。
 
 ## 技改对照方法
 
@@ -58,32 +48,3 @@ import { withBase } from 'vitepress'
 ## 缺测处理与结果回查 {#缺测处理与分析工具验收}
 
 保留缺测和补值标记，性能验证优先用实测记录。输出表保留时间、机组、工况和筛选理由，便于从图上的点回查原始记录。
-
-::: details 逐叶片散点图的 Python 示例
-
-下载站内逐叶片 CSV 后，将它与脚本放在同一目录。示例用 pandas 和 Matplotlib，机组间共享坐标轴，三片叶片共用配色规则。
-
-```python
-import matplotlib.pyplot as plt
-import pandas as pd
-
-data = pd.read_csv("kelmarsh-blade-pitch.csv")
-turbines = list(data.groupby("turbine", sort=True))
-fig, axes = plt.subplots(
-    1, len(turbines), squeeze=False, sharex=True, sharey=True, layout="constrained"
-)
-for ax, (turbine, rows) in zip(axes[0], turbines):
-    for blade, color in zip("abc", ["#3069a2", "#d38124", "#1e836a"]):
-        ax.scatter(
-            rows["wind_ms"], rows[f"pitch_{blade}_deg"],
-            s=7, alpha=0.35, color=color, label=f"Blade {blade.upper()}"
-        )
-    ax.set(title=turbine, xlabel="Wind speed (m/s)")
-axes[0, 0].set_ylabel("Pitch angle (deg)")
-axes[0, 0].legend()
-plt.show()
-```
-
-局部比较时，在两台机组上使用相同的风速与桨距角显示区间。查询点带时用同一区间筛选原表，并回到相邻窗口检查工况。 [逐叶片案例 CSV](/data/kelmarsh-blade-pitch.csv)
-
-:::

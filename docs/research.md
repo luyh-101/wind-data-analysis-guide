@@ -34,6 +34,6 @@ import { withBase } from 'vitepress'
 
 ### 数据处理复现
 
-上表的 CSV 可直接用于分析。需要从原始记录复算时，可下载 <a :href="withBase('/data/reproduce-scada-cases.py')" download>Python 脚本</a>、<a :href="withBase('/data/aventa-case-input.parquet')" download>Aventa 原始记录（Parquet）</a>或 <a :href="withBase('/data/engie-case-input.zip')" download>ENGIE 原始记录（ZIP）</a>。
+从原始记录复算时，下载 <a :href="withBase('/data/reproduce-scada-cases.py')" download>Python 脚本</a>以及对应的数据文件：<a :href="withBase('/data/aventa-case-input.parquet')" download>Aventa（Parquet）</a>或 <a :href="withBase('/data/engie-case-input.zip')" download>ENGIE（ZIP）</a>。
 
 运行命令、字段对照与数据署名见 <a :href="withBase('/data/case-data-notes.txt')" download>案例数据说明</a>。

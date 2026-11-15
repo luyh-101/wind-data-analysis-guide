@@ -18,7 +18,7 @@ const fmtKw = value => new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 1
 <template>
   <figure v-if="example === 'pairing'" class="lesson-figure" aria-labelledby="pairing-caption">
     <figcaption id="pairing-caption" class="lesson-title">同一个 10 分钟窗口，两种时间标记</figcaption>
-    <p class="lesson-note">AWAKEN，2023-08-24 UTC。窗口包含 00:00，不包含 00:10。</p>
+    <p class="lesson-note">AWAKEN，2023-08-24 UTC。配对键为统一后的窗口起点。</p>
     <div class="lesson-timeline" aria-hidden="true">
       <div class="lesson-axis"><span>00:00</span><span>00:05</span><span>00:10</span></div>
       <div class="lesson-ticks">
@@ -37,7 +37,7 @@ const fmtKw = value => new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 1
 
   <figure v-else-if="example === 'coverage'" class="lesson-figure" aria-labelledby="coverage-caption">
     <figcaption id="coverage-caption" class="lesson-title">两条曲线各能估算多少验证窗口</figcaption>
-    <p class="lesson-note">AWAKEN 有 {{ data.coverage.total }} 个符合条件的验证窗口。比较误差时，选取两条曲线都能估算的窗口，并使用同一实测功率。</p>
+    <p class="lesson-note">{{ data.coverage.total }} 个留出窗口按两条曲线各自能否插值分为四组。</p>
     <div class="lesson-coverage-track" aria-hidden="true">
       <span v-for="group in coverageGroups" :key="group.key" :class="'lesson-segment-' + group.key"
         :style="{ flexGrow: data.coverage[group.key] }"></span>
@@ -64,6 +64,6 @@ const fmtKw = value => new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 1
         <strong>后段减前段：{{ fmtKw(group.after.power - group.before.power) }} kW</strong>
       </div>
     </div>
-    <p class="lesson-result">按两种风速分箱时，落入 6–7 m/s 的记录不同。发现功率差后，先检查测点能否代表来流，并核对风向和运行工况，再判断机组性能是否变化。</p>
+    <p class="lesson-result">按雷达风速分箱时，前后两组的平均功率差较大。改用机舱风速后，入选窗口随之改变。比较同机组前后出力时，应固定分箱用的风速来源。</p>
   </figure>
 </template>
