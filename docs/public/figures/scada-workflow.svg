@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 293" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<title>从原始记录到有效样本</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#006c60" stroke-width="1.5"/></marker></defs>
+<rect x="1" y="1" width="718" height="291" rx="10" fill="#f7faf9" stroke="#cbdad9"/>
+<text x="27" y="44" fill="#19343b" font-size="26" font-weight="700" text-anchor="start">从原始记录到有效样本</text>
+<rect x="28" y="78" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="127" y="108" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">读取原始数据</text>
+<text x="127" y="136" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">保留原表与质量标记</text>
+<rect x="261" y="78" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="360" y="108" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">核对字段</text>
+<text x="360" y="136" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">单位、测点、状态码</text>
+<rect x="494" y="78" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="593" y="108" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">统一时间</text>
+<text x="593" y="136" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">时区、间隔、窗口</text>
+<rect x="494" y="190" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="593" y="220" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">检查数据质量</text>
+<text x="593" y="248" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">缺测、重复、异常值</text>
+<rect x="261" y="190" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="360" y="220" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">按用途筛选工况</text>
+<text x="360" y="248" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">必要时配对独立测风</text>
+<rect x="28" y="190" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="127" y="220" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">输出有效样本</text>
+<text x="127" y="248" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">同时保留筛选原因</text>
+<path d="M232 116H255" fill="none" stroke="#006c60" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M465 116H488" fill="none" stroke="#006c60" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M593 162V183" fill="none" stroke="#006c60" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M488 228H465" fill="none" stroke="#006c60" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M255 228H232" fill="none" stroke="#006c60" stroke-width="2.5" marker-end="url(#arrow)"/>
+</svg>

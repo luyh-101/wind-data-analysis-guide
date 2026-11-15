@@ -1,0 +1,37 @@
+风电数据分析教程 · 案例数据说明
+
+站内数据取自以下公开数据集。教程按案例需要选取时段、机组和字段，并做汇总、筛选或配对。
+
+Aventa AV-7
+Sarah Barber、Florian Hammer、Yuriy Marykovskiy，Aventa AV-7 (6kW) IET-OST Research Wind Turbine SCADA with Static Yaw Offset，第 2 版，CC BY 4.0。
+https://doi.org/10.5281/zenodo.16738078
+取 2025 年 6 月 4–10 日（UTC）的记录，检查数值，按分钟求均值，每窗至少 55 条有效记录，共得到 10,032 个窗口。
+datetime → time_utc；wind_speed → wind_ms；generator_speed → generator_rpm；power_output → power_kw；blade_pitch_deg → pitch_deg。
+
+ENGIE La Haute Borne
+ENGIE Renewables 发布，取自 OpenOA 的 2014–2015 年示例归档，Etalab Open Licence 2.0。
+https://github.com/NatLabRockies/OpenOA#example-notebooks-and-data
+取 R80711 机组 2014 年 2–3 月记录。转为 UTC 后排除 6 组时间冲突的 12 条记录，保留 8,490 条，并标记正功率且分析字段有效的样本。
+Wind_turbine_name → turbine；Date_time → time_utc；Ws_avg → wind_ms；Ba_avg → pitch_deg；P_avg → power_kw。
+
+Kelmarsh
+Charlie Plumley（Cubico），Kelmarsh wind farm data，CC BY 4.0。
+https://doi.org/10.5281/zenodo.8252025
+取 1、2 号机组 2016 年 7 月（UTC）的十分钟记录。案例按正功率初筛，三片桨距角对应 pitch_a_deg、pitch_b_deg、pitch_c_deg。
+
+AWAKEN King Plains
+Nicola Bodini，AWAKEN wind farm wake benchmark inputs，CC BY 4.0。
+https://doi.org/10.5281/zenodo.15623845
+提取 WT041 的一分钟记录和 A1 地基雷达 80 m 层的测风记录，按十分钟窗口配对。
+nacelle_ms 是发布数据中已修正到轮毂高度的风速，lidar_ms 是雷达测层风速。valid_minute 和 generating_minute 分别为有效分钟数和通过发电筛选的分钟数，eligible 标记合格的配对窗口。
+
+许可
+CC BY 4.0：https://creativecommons.org/licenses/by/4.0/
+Etalab Open Licence 2.0：https://github.com/etalab/licence-ouverte/blob/master/open-licence.txt
+
+从原始节选复算
+将脚本和原始数据节选放在同一目录，安装 pandas 和 pyarrow 后运行：
+
+python reproduce-scada-cases.py --aventa aventa-case-input.parquet --engie engie-case-input.zip
+
+也可以只传其中一个数据参数。输出在 reproduced-data 目录，可用 UTC 时间戳与站内 CSV 对照。

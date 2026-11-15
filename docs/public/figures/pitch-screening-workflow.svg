@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 293" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<title>由候选偏离查找异常证据</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#006c60" stroke-width="1.5"/></marker></defs>
+<rect x="1" y="1" width="718" height="291" rx="10" fill="#f7faf9" stroke="#cbdad9"/>
+<text x="27" y="44" fill="#19343b" font-size="26" font-weight="700" text-anchor="start">由候选偏离查找异常证据</text>
+<rect x="28" y="78" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="127" y="108" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">标记散点偏离</text>
+<text x="127" y="136" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">同工况下对照基线</text>
+<rect x="261" y="78" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="360" y="108" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">回到原始时序</text>
+<text x="360" y="136" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">查看持续时间与边界</text>
+<rect x="494" y="78" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="593" y="108" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">逐叶片核对</text>
+<text x="593" y="136" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">对比同期指令和反馈</text>
+<rect x="494" y="190" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="593" y="220" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">核查告警与工况</text>
+<text x="593" y="248" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">查看共同指令和状态</text>
+<rect x="261" y="190" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="360" y="220" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">汇总现场证据</text>
+<text x="360" y="248" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">关联事件和检修记录</text>
+<rect x="28" y="190" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="127" y="220" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">给出筛查判断</text>
+<text x="127" y="248" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">疑似故障、工况变化等</text>
+<path d="M232 116H255" fill="none" stroke="#006c60" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M465 116H488" fill="none" stroke="#006c60" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M593 162V183" fill="none" stroke="#006c60" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M488 228H465" fill="none" stroke="#006c60" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M255 228H232" fill="none" stroke="#006c60" stroke-width="2.5" marker-end="url(#arrow)"/>
+</svg>

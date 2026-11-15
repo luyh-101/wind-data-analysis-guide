@@ -197,39 +197,181 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
-.linked-scatter-grid {
+.vp-doc .learning-path,
+.vp-doc .scatter-reading {
+  list-style: none;
+  counter-reset: step;
+  padding: 0;
+}
+
+.vp-doc .learning-path {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0.75rem;
-  margin-block: 1.25rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.9rem;
 }
 
-.linked-scatter-grid figure {
+.vp-doc .learning-path li {
+  position: relative;
+  counter-increment: step;
   margin: 0;
-  min-width: 0;
+  padding: 1.05rem 0.9rem;
+  border-block-start: 2px solid var(--vp-c-brand-1);
+  background: var(--vp-c-bg-soft);
+  font-size: var(--tutorial-note-size);
 }
 
-.linked-scatter-grid a {
+.vp-doc .learning-path li::before,
+.vp-doc .scatter-reading figcaption::before {
+  content: counter(step, decimal-leading-zero);
   display: block;
-  border-radius: 8px;
+  margin-block-end: 0.35rem;
+  color: var(--vp-c-brand-1);
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
-.linked-scatter-grid img {
-  width: 100%;
-  height: auto;
+.vp-doc .learning-path li:not(:last-child)::after {
+  content: "›";
+  position: absolute;
+  inset-block-start: 40%;
+  inset-inline-end: -0.69rem;
+  color: var(--vp-c-brand-1);
+}
+
+.vp-doc .learning-path li p {
+  margin: 0.25rem 0 0;
+}
+
+.vp-doc .quantities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-block: 1rem 1.5rem;
+}
+
+.vp-doc .quantities > div {
+  padding: 0.8rem 1rem;
   border: 1px solid var(--vp-c-divider);
   border-radius: 8px;
+  background: var(--vp-c-bg-soft);
 }
 
-.linked-scatter-grid figcaption {
-  margin-top: 0.4rem;
-  text-align: center;
+.vp-doc .quantities dt {
+  font-weight: 700;
+}
+
+.vp-doc .quantities dd {
+  margin: 0.32rem 0 0;
   font-size: var(--tutorial-note-size);
-  font-weight: 600;
+  color: var(--vp-c-text-2);
+}
+
+.vp-doc .tutorial-figure {
+  margin: 1.5rem auto;
+  max-width: 48rem;
+}
+
+.vp-doc .tutorial-figure a {
+  display: block;
+}
+
+.vp-doc .tutorial-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-inline: auto;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: white;
+}
+
+.vp-doc .tutorial-figure figcaption {
+  margin-block-start: 0.55rem;
+  font-size: var(--tutorial-note-size);
+  line-height: 1.65;
+  color: var(--vp-c-text-2);
+}
+
+.vp-doc .tutorial-figure figcaption strong {
+  display: block;
+  color: var(--vp-c-text-1);
+}
+
+.vp-doc .scatter-reading > li {
+  counter-increment: step;
+  margin: 0;
+}
+
+.vp-doc .scatter-reading figure {
+  display: grid;
+  grid-template-columns: minmax(0, 2.5fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  max-width: none;
+}
+
+.vp-doc .method-map {
+  display: grid;
+  grid-template-columns: minmax(8rem, 1fr) minmax(0, 2.4fr);
+  align-items: center;
+  gap: 1rem;
+  margin-block: 1.4rem;
+  padding: 1rem;
+  background: var(--vp-c-bg-soft);
+  border-radius: 8px;
+}
+
+.vp-doc .method-map > strong {
+  padding-inline-start: 0.3rem;
+}
+
+.vp-doc .method-map ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 0.95rem;
+  border-inline-start: 2px solid var(--vp-c-brand-1);
+}
+
+.vp-doc .method-map li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.15rem 0.6rem;
+  padding: 0.45rem 0.7rem;
+  background: var(--vp-c-bg);
+  border-radius: 4px;
+}
+
+.vp-doc .method-map li span {
+  grid-row: 2;
+  grid-column: 1 / -1;
+  color: var(--vp-c-text-2);
+  font-size: var(--tutorial-note-size);
+}
+
+.vp-doc .method-map li a {
+  grid-row: 1;
+  grid-column: 2;
+  font-size: var(--tutorial-note-size);
 }
 
 @media (max-width: 750px) {
-  .linked-scatter-grid {
+  .vp-doc .learning-path,
+  .vp-doc .quantities,
+  .vp-doc .scatter-reading figure,
+  .vp-doc .method-map {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .vp-doc .learning-path li {
+    padding-block: 0.65rem;
+  }
+
+  .vp-doc .learning-path li:not(:last-child)::after {
+    content: none;
+  }
+
+  .vp-doc .scatter-reading figure {
+    gap: 0.25rem;
   }
 }

@@ -8,85 +8,38 @@ import { withBase } from 'vitepress'
 
 气流带动由叶片和轮毂组成的**风轮**旋转。风轮直接或经传动系统带动发电机，把机械能转成电能。单片叶片还可以绕从叶根到叶尖的长轴转动，这个动作叫**变桨**。
 
-<input class="motion-toggle" id="operations-still-motion" type="checkbox" />
-<label class="motion-label" for="operations-still-motion">显示静态画面</label>
-<figure class="pitch-angle">
-  <a :href="withBase('/figures/blade-pitch-angle-still.webp')" target="_blank" rel="noopener" aria-label="在新标签页打开桨距角示意大图">
-    <picture class="motion-playing">
-      <source media="(prefers-reduced-motion: no-preference)" srcset="/figures/blade-pitch-angle.webp" />
-      <img src="/figures/blade-pitch-angle-still.webp" width="720" height="500" alt="上图标出叶片上的一个截面和从叶尖看向叶根的方向。下图沿长轴看这个截面，青色翼型绕黑点转动，灰色基准线固定。橙色夹角随之从 0 度增至 50 度。" />
-    </picture>
-    <img class="motion-still" src="/figures/blade-pitch-angle-still.webp" width="720" height="500" alt="沿叶片长轴看，青色截面的当前方向与灰色基准方向相差 50 度。这是示意角度。" />
-  </a>
-  <figcaption>上图标出观察位置。下图沿叶片长轴看，青色截面绕黑点转，灰色虚线固定。橙色圆弧标出的就是桨距角。</figcaption>
+<figure class="tutorial-figure">
+  <a :href="withBase('/figures/pitch-concept.svg')" target="_blank" rel="noopener"><img src="/figures/pitch-concept.svg" width="720" height="668" loading="lazy" alt="上层画出三片叶片绕风轮轴转动、风从叶片一侧吹向机舱以及机舱内发电机。下层沿单片叶片长轴看翼型截面，用橙色圆弧标出基准方向到当前方向的夹角。" /></a>
+  <figcaption><strong>风轮旋转与单片叶片变桨</strong> 从迎风面看三片叶片一起旋转，再沿单片叶片长轴看同一翼型截面转过的角度。</figcaption>
 </figure>
-
-<style scoped>
-.pitch-angle {
-  max-width: 720px;
-  margin: 0;
-}
-
-.pitch-angle img {
-  display: block;
-  width: 100%;
-  height: auto;
-  background: var(--vp-c-bg-soft);
-  border-radius: 8px;
-}
-
-.pitch-angle .motion-still,
-.motion-toggle:checked ~ .pitch-angle .motion-playing {
-  display: none;
-}
-
-.motion-toggle:checked ~ .pitch-angle .motion-still {
-  display: block;
-}
-
-.motion-toggle {
-  appearance: auto;
-  accent-color: var(--vp-c-brand-1);
-  margin-right: 0.45rem;
-}
-
-.motion-label {
-  display: inline-block;
-  margin-bottom: 0.75rem;
-  color: var(--vp-c-text-2);
-  cursor: pointer;
-}
-
-.pitch-angle figcaption {
-  margin-top: 0.45rem;
-}
-</style>
 
 ### 四个常用运行量
 
-- **风速**（m/s）表示测点处气流流动的快慢。比较机舱和激光雷达的风速时，要看测点位置和高度。
-- **发电机转速**（r/min）是发电机转子每分钟转过的圈数。带齿轮箱的机组，发电机转速与风轮转速可能相差很大，画图前要核对字段的测点。
-- **桨距角**（°）表示叶片相对零桨距位置绕自身长轴转过多少。沿长轴看同一个截面，比较它在当前姿态和基准姿态下的方向，就能量出这个角。变桨改变叶片迎风的姿态，调节风轮吸收的能量。实际机型各有自己的零位和正负方向。
-- **有功功率**（kW）表示机组实际输出电能的速率，发电时常称为出力。分析时区分实测功率与控制系统给出的功率目标或上限。
+<dl class="quantities">
+  <div><dt>风速（m/s）</dt><dd>测点处气流流动的快慢。比较两路风速时先核对测点位置和高度。</dd></div>
+  <div><dt>发电机转速（r/min）</dt><dd>发电机转子每分钟转过的圈数。带齿轮箱的机组要核对记录来自发电机侧还是风轮侧。</dd></div>
+  <div><dt>桨距角（°）</dt><dd>叶片相对于基准位置绕自身长轴转过的角度。零位与正方向由机型定义，变桨会改变叶片的迎风姿态和吸收的风能。</dd></div>
+  <div><dt>有功功率（kW）</dt><dd>机组实际输出电能的速率，发电时也称出力。分析时将实测功率与功率设定值分开。</dd></div>
+</dl>
 
 ## 典型运行工况
 
-风速达到**切入风速**后，机组具备启动发电的风速条件。正常发电时，转速和功率通常随风速上升。转速在一段风速内基本不变，散点图上就会出现近水平的**转速平台**。达到**额定功率**所对应的风速称为**额定风速**，具体数值按机组的规定条件确定。
+达到**切入风速**后，机组具备启动发电的风速条件。转速在一段风速内基本不变时，散点图会出现近水平的**转速平台**。达到额定功率所对应的风速称为**额定风速**。
 
-<figure>
-  <a :href="withBase('/figures/operation-trends.svg')" target="_blank" rel="noopener" aria-label="在新标签页打开典型运行规律示意图"><img src="/figures/operation-trends.svg" width="720" height="520" alt="切入风速和额定风速把横轴分为三个阶段。切入前通常不发电。切入后转速和功率上升，示意中的转速先进入平台，功率随后达到额定值。接近和超过额定风速时，变桨调节更明显。" /></a>
-  <figcaption>这张图示意转速先趋稳、功率随后达到额定值。接近额定风速后，通常能看到更明显的变桨调节。</figcaption>
+<figure class="tutorial-figure">
+  <a :href="withBase('/figures/operation-trends.svg')" target="_blank" rel="noopener"><img src="/figures/operation-trends.svg" width="720" height="532" loading="lazy" alt="三个面板共用风速轴。切入前通常不发电，切入后转速和功率上升。图中转速先趋于稳定，功率随后达到额定值，变桨调节在额定附近及以上更明显。" /></a>
+  <figcaption><strong>变速变桨机组的典型运行趋势</strong> 从上往下对照同一风速。转速平台可以先于额定功率出现，具体过程由机型和控制策略决定。</figcaption>
 </figure>
 
 工况是机组当时所处的运行状态。相同风速下的待机、正常发电和限功率记录可能落在不同点带，比较前先查运行状态。
 
 | 运行工况 | 运行特点 | 数据中可能出现的现象 |
 | --- | --- | --- |
-| 待机与启停 | 风速低于切入风速（机组开始发电所需的风速）时，机组通常待机。启动或停机时，转速和桨距角会随控制过程改变。 | 待机功率接近零。启停窗口内，功率、转速或桨距角可能连续变化。 |
-| 额定风速以下正常发电 | 风机随风况调整运行点，功率通常随风速增加。 | 风速–功率散点总体呈上升趋势，变速机组的转速也常出现上升段。 |
-| 额定风速附近及以上正常发电 | 达到额定输出后，机组通过变桨等调节将转速和功率控制在允许范围内。 | 功率多在额定值附近波动。桨距角可能继续随风速改变。 |
-| 限功率与降额 | 调度限发会降低功率上限，设备或环境条件也可能使机组主动降低可输出功率，即降额。 | 风速足以发电时，功率仍可能低于正常发电样本，或在某一水平形成密集点带。 |
-| 保护停机、故障停机与检修 | 高风速保护、故障或计划检修都可能使机组停机。 | 有风时也可能出现低转速、零功率和停机桨距角。结合状态、告警与工单区分原因。 |
+| 待机与启停 | 切入前通常待机，启停时控制量随过程调整。 | 待机功率接近零。启停时功率、转速或桨距角连续变化。 |
+| 额定风速以下正常发电 | 功率通常随风速增加。 | 功率点带总体上升，变速机组常有转速上升段。 |
+| 额定风速附近及以上正常发电 | 通过变桨等方式限制转速和功率。 | 功率在额定值附近波动，桨距角随风速调整。 |
+| 限功率与降额 | 调度要求或设备、环境约束使功率上限降低。 | 风速足够时，功率仍低于正常参考，或形成水平点带。 |
+| 保护停机、故障停机与检修 | 保护动作、故障或计划检修使机组停机。 | 有风时也可出现低转速和零功率。按状态、告警与工单区分原因。 |
 
 上游机组形成的**尾流**通常会降低下游的平均风速、增强湍流。尾流、地形和覆冰都可能影响出力，可以结合风向和运行事件复核。[SCADA 数据质量与工况筛选](/scada)
 
@@ -98,11 +51,11 @@ import { withBase } from 'vitepress'
 
 三张图共用 Aventa AV-7 的 10,032 条分钟记录。绿色为正功率，棕色为零或负功率。点击图表可查看原图。[三图案例 CSV](/data/aventa-linked-scatter.csv)
 
-<div class="linked-scatter-grid">
-  <figure><a :href="withBase('/figures/wind-generator.png')" target="_blank" rel="noopener" aria-label="在新标签页打开风速–发电机转速原图"><img src="/figures/wind-generator-guide.png" width="656" height="496" alt="风速和发电机转速散点图，角框标出上方近水平的转速平台。" /></a><figcaption>1. 风速–发电机转速<br />上方约 750–780 r/min 形成平台</figcaption></figure>
-  <figure><a :href="withBase('/figures/generator-power.png')" target="_blank" rel="noopener" aria-label="在新标签页打开发电机转速–有功功率原图"><img src="/figures/generator-power-guide.png" width="656" height="496" alt="发电机转速和有功功率散点图，角框标出右侧相近转速下的功率差异。" /></a><figcaption>2. 发电机转速–有功功率<br />看右侧相近转速下的功率差异</figcaption></figure>
-  <figure><a :href="withBase('/figures/wind-pitch.png')" target="_blank" rel="noopener" aria-label="在新标签页打开风速–桨距角原图"><img src="/figures/wind-pitch-guide.png" width="656" height="496" alt="风速和桨距角散点图，角框标出低风速处不同高度的桨距角点带。" /></a><figcaption>3. 风速–桨距角<br />左侧约 39° 的点带含零功率记录</figcaption></figure>
-</div>
+<ol class="scatter-reading">
+  <li><figure class="tutorial-figure"><a :href="withBase('/figures/wind-generator.png')" target="_blank" rel="noopener"><img src="/figures/aventa-wind-speed.png" width="1020" height="562" loading="lazy" alt="风速–发电机转速图框出了约 750–780 r/min 的水平点群。" /></a><figcaption><strong>先看风速–发电机转速</strong> 沿风速轴看转速如何上升，再看上方约 750–780 r/min 的平台。</figcaption></figure></li>
+  <li><figure class="tutorial-figure"><a :href="withBase('/figures/generator-power.png')" target="_blank" rel="noopener"><img src="/figures/aventa-speed-power.png" width="1020" height="562" loading="lazy" alt="发电机转速–有功功率图框出了右侧同一转速附近纵向分散的功率点。" /></a><figcaption><strong>再看发电机转速–有功功率</strong> 查平台对应的转速区间。即使转速接近，功率仍有明显差异。</figcaption></figure></li>
+  <li><figure class="tutorial-figure"><a :href="withBase('/figures/wind-pitch.png')" target="_blank" rel="noopener"><img src="/figures/aventa-wind-pitch.png" width="1020" height="562" loading="lazy" alt="风速–桨距角图框出了低风速的多条角度点带，其中约 39 度的一带有棕色记录。" /></a><figcaption><strong>最后对照风速–桨距角</strong> 看低风速区有哪些角度点带。约 39° 的点带含零功率记录，按时间戳回查工况。</figcaption></figure></li>
+</ol>
 
 用时间戳把三张图连起来。每张图从同一行取对应的两列来定位同一条记录。
 
@@ -111,25 +64,21 @@ import { withBase } from 'vitepress'
 | 21:44 | 5.61 | 753 | 6.12 | 17.16 |
 | 00:00 | 1.27 | 0 | 0 | 38.86 |
 
-21:44 的记录在第一张图靠近转速平台，在第三张图落在较低的角度带。00:00 的零功率记录则落在约 39° 的角度带。要判断后一条为何没有发电，回查前后几分钟的状态码或事件。机组额定参数按设备资料确定。
+21:44 的记录靠近转速平台，桨距角落在较低的点带。00:00 的零功率记录落在约 39° 的点带，可回查前后状态码或事件。
 
-桨距角与功率是否同时偏离，可以在相近风速、转速和工况下补看桨距角–功率图。风速–功率图的典型形状、建模和验证见 [功率曲线建模与验证](/power)。
-
-### 跨机组控制差异判读
-
-先选机型、测点和运行条件可比的机组，再用同一时间范围、统一坐标分别出图。若转速平台或低速点带出现差异，先查启停比例、功率设定及控制版本，再将差异对应到原始时序。 [运行分析专题](/practice#控制表现与多信号复核)
+[跨机组出现不同点带时的判读方法](/practice#控制表现与多信号复核)
 
 ## 变桨故障线索与复核
 
-散点图适合筛查，判断叶片有没有跟上指令要回到时序。下面示意三片叶片收到相同指令时的两种走势。
+先定位散点偏离的时段，再对照变桨指令和反馈。反馈持续滞后或卡在某个角度时，结合告警和检修记录区分驱动、供电及角度传感器异常。
 
-<figure>
-  <a :href="withBase('/figures/pitch-following-patterns.svg')" target="_blank" rel="noopener" aria-label="在新标签页打开变桨指令与反馈示意图"><img src="/figures/pitch-following-patterns.svg" width="720" height="340" loading="lazy" alt="左图三片叶片的实际角度几乎重合，均跟上指令。右图有两片跟上，叶片 3 的实际角度仍停在原位置。" /></a>
-  <figcaption>判读示意。指令升高后，右图中叶片 3 的反馈角仍停在原位置。</figcaption>
+<figure class="tutorial-figure">
+  <a :href="withBase('/figures/pitch-fault-workflow.svg')" target="_blank" rel="noopener"><img src="/figures/pitch-fault-workflow.svg" width="720" height="293" loading="lazy" alt="流程依次定位散点异常，区分单片或多片，对照功率转速和工况，查指令反馈和告警，回查时序及检修，再记录复核结论。" /></a>
+  <figcaption><strong>变桨故障复核流程</strong> 单片偏离时先查对应叶片，多片同步变化时先查整机状态与共同指令。</figcaption>
 </figure>
 
-单片长期偏离时，查该叶片的指令、反馈和告警。多片同步变化时，先查整机工况、功率设定和共同指令。驱动和角度测量问题都可能表现为偏离，可结合时序与检修记录复核。[变桨状态监测与异常筛查](/pitch)
+[逐叶片时序与异常筛查](/pitch#变桨监测方法与选用条件)
 
 ## 测量与分析工具
 
-用 SCADA（监控与数据采集系统）查看运行量和状态，用控制器记录、告警、检修工单复核事件。测风塔、激光雷达和机舱风速计提供不同位置的风速观测。电子表格适合初看数据，Python 可批量清洗、绘图和统计，OpenOA 可用于风场运行评估。
+用 SCADA 查看运行量和状态，用控制器记录、告警和检修工单复核事件。电子表格可用于查看样本，Python 可批量清洗、统计和制图。

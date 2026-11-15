@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 293" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<title>从功率基准到电量损失</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#006c60" stroke-width="1.5"/></marker></defs>
+<rect x="1" y="1" width="718" height="291" rx="10" fill="#f7faf9" stroke="#cbdad9"/>
+<text x="27" y="44" fill="#19343b" font-size="26" font-weight="700" text-anchor="start">从功率基准到电量损失</text>
+<rect x="28" y="78" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="127" y="108" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">准备运行数据</text>
+<text x="127" y="136" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">时窗、状态与计量边界</text>
+<rect x="261" y="78" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="360" y="108" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">建立可比基准</text>
+<text x="360" y="136" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">测风对照、功率曲线</text>
+<rect x="494" y="78" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="593" y="108" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">估算参考电量</text>
+<text x="593" y="136" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">窗口功率乘以时长</text>
+<rect x="494" y="190" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="593" y="220" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">匹配运行事件</text>
+<text x="593" y="248" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">识别启停、限功率等</text>
+<rect x="261" y="190" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="360" y="220" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">分段计算损失</text>
+<text x="360" y="248" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">重叠时段按规则归因</text>
+<rect x="28" y="190" width="198" height="77" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="127" y="220" fill="#006c60" font-size="20" font-weight="700" text-anchor="middle">汇总评价结果</text>
+<text x="127" y="248" fill="#44616a" font-size="16" font-weight="500" text-anchor="middle">电量差、分项和覆盖</text>
+<path d="M232 116H255" fill="none" stroke="#006c60" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M465 116H488" fill="none" stroke="#006c60" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M593 162V183" fill="none" stroke="#006c60" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M488 228H465" fill="none" stroke="#006c60" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M255 228H232" fill="none" stroke="#006c60" stroke-width="2.5" marker-end="url(#arrow)"/>
+</svg>

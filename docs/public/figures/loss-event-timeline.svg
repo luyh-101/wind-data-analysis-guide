@@ -1,35 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="330" viewBox="0 0 720 330" role="img" aria-labelledby="title desc" xml:lang="zh-CN">
-  <title id="title">限功率与故障停机重叠时的分段归因</title>
-  <desc id="desc">算例中限功率从第 2 分钟持续至第 7 分钟，故障停机从第 5 分钟持续至第 9 分钟。第 5 至 7 分钟重叠，按本例故障优先。归因把第 2 至 5 分钟计入限功率，第 5 至 9 分钟计入故障。</desc>
-  <g font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" fill="#213832">
-    <rect x="1" y="1" width="718" height="328" rx="14" fill="#f5faf7" stroke="#c0d5c9" stroke-width="2"/>
-    <rect x="395" y="77" width="106" height="90" fill="#e9e1eb"/>
-    <text x="448" y="57" font-size="25" font-weight="700" text-anchor="middle" fill="#684d6a">重叠 5–7 分钟</text>
-    <g font-size="23" font-weight="600" text-anchor="end">
-      <text x="123" y="102">限功率</text>
-      <text x="123" y="152">故障停机</text>
-      <text x="123" y="229">归因结果</text>
-    </g>
-    <path d="M130 95H660M130 145H660" fill="none" stroke="#c9d6d0" stroke-width="2"/>
-    <rect x="236" y="82" width="265" height="26" rx="6" fill="#b5681c"/>
-    <rect x="395" y="132" width="212" height="26" rx="6" fill="#78516e"/>
-    <path d="M395 168v27M501 168v27" stroke="#816887" stroke-width="2" stroke-dasharray="4 4"/>
-    <rect x="130" y="201" width="106" height="41" fill="#e1ebe5"/>
-    <rect x="236" y="201" width="159" height="41" fill="#f0d9b6"/>
-    <rect x="395" y="201" width="212" height="41" fill="#e5d9e6"/>
-    <rect x="607" y="201" width="53" height="41" fill="#e1ebe5"/>
-    <g font-size="23" font-weight="700" text-anchor="middle">
-      <text x="183" y="230">正常</text>
-      <text x="315" y="230" fill="#84450d">限功率</text>
-      <text x="501" y="230" fill="#684d6a">故障</text>
-      <text x="634" y="229" font-size="19">正常</text>
-    </g>
-    <path d="M130 262H660M130 257v10M236 257v10M395 257v10M501 257v10M607 257v10M660 257v10" fill="none" stroke="#59716a" stroke-width="2"/>
-    <g font-size="22" text-anchor="middle">
-      <text x="130" y="293">0</text><text x="236" y="293">2</text>
-      <text x="395" y="293">5</text><text x="501" y="293">7</text>
-      <text x="607" y="293">9</text><text x="660" y="293">10</text>
-    </g>
-    <text x="660" y="319" font-size="20" text-anchor="end">时间（分钟）</text>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 339" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<title>限功率与故障重叠时的损失归因</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#006c60" stroke-width="1.5"/></marker></defs>
+<rect x="1" y="1" width="718" height="337" rx="10" fill="#f7faf9" stroke="#cbdad9"/>
+<text x="25" y="43" fill="#19343b" font-size="26" font-weight="700" text-anchor="start">重叠事件按时间分段归因</text>
+<text x="24" y="112" fill="#19343b" font-size="19" font-weight="650" text-anchor="start">原始限功率</text>
+<path d="M160 106H670" fill="none" stroke="#cbdad9" stroke-width="1.4" />
+<text x="24" y="166" fill="#19343b" font-size="19" font-weight="650" text-anchor="start">原始故障</text>
+<path d="M160 160H670" fill="none" stroke="#cbdad9" stroke-width="1.4" />
+<text x="24" y="236" fill="#19343b" font-size="19" font-weight="650" text-anchor="start">计入损失</text>
+<path d="M160 230H670" fill="none" stroke="#cbdad9" stroke-width="1.4" />
+<rect x="262" y="90" width="255" height="32" rx="4" fill="#385b81" stroke="none"/>
+<text x="389.5" y="112" fill="white" font-size="17" font-weight="650" text-anchor="middle">限功率</text>
+<rect x="415" y="144" width="204" height="32" rx="4" fill="#a04d24" stroke="none"/>
+<text x="517.0" y="166" fill="white" font-size="17" font-weight="650" text-anchor="middle">故障</text>
+<rect x="262" y="214" width="153" height="32" rx="4" fill="#385b81" stroke="none"/>
+<text x="338.5" y="236" fill="white" font-size="17" font-weight="650" text-anchor="middle">20 kWh</text>
+<rect x="415" y="214" width="204" height="32" rx="4" fill="#a04d24" stroke="none"/>
+<text x="517.0" y="236" fill="white" font-size="17" font-weight="650" text-anchor="middle">80 kWh</text>
+<path d="M160 254v9" fill="none" stroke="#44616a" stroke-width="1.5" />
+<text x="160" y="287" fill="#44616a" font-size="17" font-weight="500" text-anchor="middle">0</text>
+<path d="M262 254v9" fill="none" stroke="#44616a" stroke-width="1.5" />
+<text x="262" y="287" fill="#44616a" font-size="17" font-weight="500" text-anchor="middle">2</text>
+<path d="M415 254v9" fill="none" stroke="#44616a" stroke-width="1.5" />
+<text x="415" y="287" fill="#44616a" font-size="17" font-weight="500" text-anchor="middle">5</text>
+<path d="M517 254v9" fill="none" stroke="#44616a" stroke-width="1.5" />
+<text x="517" y="287" fill="#44616a" font-size="17" font-weight="500" text-anchor="middle">7</text>
+<path d="M619 254v9" fill="none" stroke="#44616a" stroke-width="1.5" />
+<text x="619" y="287" fill="#44616a" font-size="17" font-weight="500" text-anchor="middle">9</text>
+<path d="M670 254v9" fill="none" stroke="#44616a" stroke-width="1.5" />
+<text x="670" y="287" fill="#44616a" font-size="17" font-weight="500" text-anchor="middle">10</text>
+<path d="M160 258H670" fill="none" stroke="#44616a" stroke-width="1.5" />
+<text x="669" y="319" fill="#44616a" font-size="18" font-weight="500" text-anchor="end">窗口内时间（min）</text>
 </svg>

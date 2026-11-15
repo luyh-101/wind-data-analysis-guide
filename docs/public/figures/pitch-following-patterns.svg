@@ -1,31 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="340" viewBox="0 0 720 340" role="img" aria-labelledby="title desc" xml:lang="zh-CN">
-  <title id="title">变桨指令与叶片反馈的两种走势</title>
-  <desc id="desc">在三片叶片接到相同指令的示意中，左图三片叶片的实际角度几乎重合，均跟上指令。右图有两片跟随指令，第三片叶片的实际角度仍停留在原位置。</desc>
-  <g font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" fill="#193530">
-    <rect x="1" y="1" width="718" height="338" rx="14" fill="#f5faf7" stroke="#bfd4cb" stroke-width="2"/>
-    <g font-size="26" font-weight="700" text-anchor="middle">
-      <text x="184" y="45">三片都跟随指令</text>
-      <text x="547" y="45">叶片 3 未跟上</text>
-    </g>
-    <g font-size="21" fill="#4c645a">
-      <text x="43" y="83">桨距角</text>
-      <text x="404" y="83">桨距角</text>
-      <text x="270" y="268">时间</text>
-      <text x="631" y="268">时间</text>
-    </g>
-    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M49 94v146h272M410 94v146h272" stroke="#779287" stroke-width="2"/>
-      <path d="M64 203h97v-73h151M425 203h97v-73h151" stroke="#5b6168" stroke-width="3" stroke-dasharray="5 6"/>
-      <path d="M64 209h99q12 0 18-19l12-37q5-16 21-16h98M425 209h99q12 0 18-19l12-37q5-16 21-16h98" stroke="#166c60" stroke-width="5"/>
-      <path d="M425 211h248" stroke="#a0522c" stroke-width="4" stroke-dasharray="12 5"/>
-      <path d="M42 307h36" stroke="#5b6168" stroke-width="3" stroke-dasharray="5 6"/>
-      <path d="M231 307h36" stroke="#166c60" stroke-width="5"/>
-      <path d="M475 307h36" stroke="#a0522c" stroke-width="4" stroke-dasharray="12 5"/>
-    </g>
-    <g font-size="21">
-      <text x="88" y="314">共同指令</text>
-      <text x="276" y="314">跟上的反馈</text>
-      <text x="520" y="314">未跟上的反馈</text>
-    </g>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 360" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<title>多片同步变化与单片持续偏离</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#006c60" stroke-width="1.5"/></marker></defs>
+<rect x="1" y="1" width="718" height="358" rx="10" fill="#f7faf9" stroke="#cbdad9"/>
+<text x="26" y="43" fill="#19343b" font-size="26" font-weight="700" text-anchor="start">同一变桨指令下的两种反馈走势</text>
+<rect x="24" y="66" width="326" height="233" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="42" y="100" fill="#19343b" font-size="21" font-weight="700" text-anchor="start">多片同步变化</text>
+<text x="47" y="136" fill="#44616a" font-size="17" font-weight="500" text-anchor="start">桨距角（°）</text>
+<path d="M48 150V258H332" fill="none" stroke="#cbdad9" stroke-width="1.5" />
+<path d="M61 230H143L165 163H320" fill="none" stroke="#44616a" stroke-width="2.3" stroke-dasharray="6 5"/>
+<path d="M61 230H154Q168 230 174 204 Q184 163 200 163H320" fill="none" stroke="#006c60" stroke-width="3.8" />
+<text x="329" y="282" fill="#44616a" font-size="17" font-weight="500" text-anchor="end">时间</text>
+<text x="316" y="200" fill="#006c60" font-size="17" font-weight="600" text-anchor="end">三片反馈近重合</text>
+<rect x="370" y="66" width="326" height="233" rx="8" fill="white" stroke="#cbdad9"/>
+<text x="388" y="100" fill="#19343b" font-size="21" font-weight="700" text-anchor="start">单片持续偏离</text>
+<text x="393" y="136" fill="#44616a" font-size="17" font-weight="500" text-anchor="start">桨距角（°）</text>
+<path d="M394 150V258H678" fill="none" stroke="#cbdad9" stroke-width="1.5" />
+<path d="M407 230H489L511 163H666" fill="none" stroke="#44616a" stroke-width="2.3" stroke-dasharray="6 5"/>
+<path d="M407 230H500Q514 230 520 204 Q530 163 546 163H666" fill="none" stroke="#006c60" stroke-width="3.8" />
+<text x="675" y="282" fill="#44616a" font-size="17" font-weight="500" text-anchor="end">时间</text>
+<path d="M407 230H666" fill="none" stroke="#a04d24" stroke-width="3.5" />
+<text x="661" y="227" fill="#a04d24" font-size="17" font-weight="600" text-anchor="end">叶片 3</text>
+<text x="662" y="199" fill="#006c60" font-size="17" font-weight="600" text-anchor="end">叶片 1、2</text>
+<path d="M29 330H62" fill="none" stroke="#44616a" stroke-width="2.3" stroke-dasharray="6 5"/>
+<text x="74" y="337" fill="#44616a" font-size="18" font-weight="500" text-anchor="start">指令</text>
+<path d="M159 330H192" fill="none" stroke="#006c60" stroke-width="3" />
+<text x="204" y="337" fill="#44616a" font-size="18" font-weight="500" text-anchor="start">跟随指令的反馈</text>
+<text x="695" y="337" fill="#44616a" font-size="18" font-weight="500" text-anchor="end">原理示意</text>
 </svg>
