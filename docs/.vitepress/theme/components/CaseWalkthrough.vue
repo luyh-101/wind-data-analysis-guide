@@ -1,0 +1,69 @@
+<script setup>
+import { data } from './lesson-cases.data.js'
+
+defineProps({ example: { type: String, required: true } })
+const fmt = (value, digits = 2) => value.toFixed(digits).replace('-', '−')
+const delta = data.pairing.nacelle - data.pairing.lidar
+const coverageGroups = [
+  { key: 'both', label: '两条都能估算' },
+  { key: 'nacelle', label: '仅机舱曲线' },
+  { key: 'lidar', label: '仅雷达曲线' },
+  { key: 'neither', label: '两条都不能估算' }
+]
+const sourceNames = { lidar_ms: 'A1 雷达', nacelle_ms: 'WT041 机舱' }
+const comparisonScale = Math.max(1500, ...data.comparison.flatMap(item => [item.before.power, item.after.power]).map(value => Math.ceil(value / 100) * 100))
+const fmtKw = value => new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 1 }).format(value).replace('-', '−')
+</script>
+
+<template>
+  <figure v-if="example === 'pairing'" class="lesson-figure" aria-labelledby="pairing-caption">
+    <figcaption id="pairing-caption" class="lesson-title">同一个 10 分钟窗口，两种时间标记</figcaption>
+    <p class="lesson-note">AWAKEN，2023-08-24 UTC。窗口包含 00:00，不包含 00:10。</p>
+    <div class="lesson-timeline" aria-hidden="true">
+      <div class="lesson-axis"><span>00:00</span><span>00:05</span><span>00:10</span></div>
+      <div class="lesson-ticks">
+        <span v-for="minute in data.pairing.minutes" :key="minute"></span>
+      </div>
+      <div class="lesson-window">
+        <span class="lesson-window-center"></span>
+      </div>
+    </div>
+    <dl class="lesson-grid">
+      <div><dt>WT041 机舱</dt><dd>00:00–00:09，共 10 条分钟记录</dd><dd class="lesson-value">{{ fmt(data.pairing.nacelle) }} m/s</dd></div>
+      <div><dt>A1 雷达</dt><dd>00:05 是整段窗口的中点标记</dd><dd class="lesson-value">{{ fmt(data.pairing.lidar) }} m/s</dd></div>
+    </dl>
+    <p class="lesson-result">将机舱的 10 条记录汇总后，按窗口起点 00:00 与雷达记录配对。机舱平均风速减去雷达风速，差值为 <strong>{{ fmt(delta) }} m/s</strong>。</p>
+  </figure>
+
+  <figure v-else-if="example === 'coverage'" class="lesson-figure" aria-labelledby="coverage-caption">
+    <figcaption id="coverage-caption" class="lesson-title">两条曲线各能估算多少验证窗口</figcaption>
+    <p class="lesson-note">AWAKEN 有 {{ data.coverage.total }} 个符合条件的验证窗口。比较误差时，选取两条曲线都能估算的窗口，并使用同一实测功率。</p>
+    <div class="lesson-coverage-track" aria-hidden="true">
+      <span v-for="group in coverageGroups" :key="group.key" :class="'lesson-segment-' + group.key"
+        :style="{ flexGrow: data.coverage[group.key] }"></span>
+    </div>
+    <dl class="lesson-coverage-key">
+      <div v-for="group in coverageGroups" :key="group.key">
+        <dt><span class="lesson-swatch" :class="'lesson-segment-' + group.key" aria-hidden="true"></span>{{ group.label }}</dt>
+        <dd>{{ data.coverage[group.key] }} 个</dd>
+      </div>
+    </dl>
+    <p class="lesson-result">两条曲线都能估算的窗口约占 <strong>{{ fmt(data.coverage.both / data.coverage.total * 100, 0) }}%</strong>。</p>
+  </figure>
+
+  <figure v-else-if="example === 'comparison'" class="lesson-figure" aria-labelledby="comparison-caption">
+    <figcaption id="comparison-caption" class="lesson-title">按雷达和机舱风速分箱时的功率对照</figcaption>
+    <p class="lesson-note">WT041，6–7 m/s 箱，16:00 UTC 前后对照。条形表示平均功率，两组用同一标尺（0–{{ fmtKw(comparisonScale) }} kW）。</p>
+    <div class="lesson-grid lesson-comparison">
+      <div v-for="group in data.comparison" :key="group.source">
+        <strong>{{ sourceNames[group.source] }}分箱</strong>
+        <div v-for="(label, key) in { before: '16:00 前', after: '16:00 起' }" :key="key" class="lesson-bar-row">
+          <div><span>{{ label }} · {{ group[key].count }} 个窗口</span><strong>{{ fmtKw(group[key].power) }} kW</strong></div>
+          <div class="lesson-bar-track" aria-hidden="true"><span :style="{ width: group[key].power / comparisonScale * 100 + '%' }"></span></div>
+        </div>
+        <strong>后段减前段：{{ fmtKw(group.after.power - group.before.power) }} kW</strong>
+      </div>
+    </div>
+    <p class="lesson-result">按两种风速分箱时，落入 6–7 m/s 的记录不同。发现功率差后，先检查测点能否代表来流，并核对风向和运行工况，再判断机组性能是否变化。</p>
+  </figure>
+</template>

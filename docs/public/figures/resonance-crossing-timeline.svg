@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="383" viewBox="0 0 720 383" role="img" aria-labelledby="title desc" xml:lang="zh-CN">
+  <title id="title">共振区间的进入、退出时刻插值</title>
+  <desc id="desc">示例在第 0、1、2、3 秒采到 8、9.5、10.5、12 转每分钟。区间为 9 到 11 转每分钟。直线插值得到第 0.67 秒进入、第 2.33 秒退出，使用未取整时刻计算，停留约 1.67 秒。</desc>
+  <g font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" fill="#1e3834">
+    <rect x="1" y="1" width="718" height="381" rx="14" fill="#f5faf7" stroke="#bfd4ca" stroke-width="2"/>
+    <text x="43" y="42" font-size="24">转速（r/min）</text>
+    <rect x="96" y="111" width="549" height="94" fill="#e1eee6"/>
+    <path d="M96 111H645M96 205H645" fill="none" stroke="#82a297" stroke-width="2" stroke-dasharray="5 5"/>
+    <text x="113" y="150" font-size="23" fill="#43645b">9–11 r/min</text>
+    <path d="M96 59v223h560M96 282v7M279 282v7M462 282v7M645 282v7" fill="none" stroke="#5c746d" stroke-width="2"/>
+    <g font-size="22" text-anchor="end">
+      <text x="83" y="71">12</text><text x="83" y="118">11</text>
+      <text x="83" y="212">9</text><text x="83" y="259">8</text>
+    </g>
+    <path d="M218 205V282M523 111V282" fill="none" stroke="#a65a36" stroke-width="2" stroke-dasharray="5 5"/>
+    <path d="M96 252L279 181.5L462 134.5L645 64" fill="none" stroke="#21665a" stroke-width="4"/>
+    <g fill="#21665a">
+      <circle cx="96" cy="252" r="6"/><circle cx="279" cy="181.5" r="6"/>
+      <circle cx="462" cy="134.5" r="6"/><circle cx="645" cy="64" r="6"/>
+    </g>
+    <g fill="#a34e25" stroke="#f5faf7" stroke-width="2">
+      <circle cx="218" cy="205" r="7"/><circle cx="523" cy="111" r="7"/>
+    </g>
+    <g font-size="21" text-anchor="middle">
+      <text x="96" y="313">0</text><text x="279" y="313">1</text>
+      <text x="462" y="313">2</text><text x="645" y="313">3</text>
+    </g>
+    <g font-size="23" text-anchor="middle" font-weight="600" fill="#914720">
+      <text x="218" y="339">0.67 秒进入</text><text x="523" y="339">2.33 秒退出</text>
+    </g>
+    <text x="697" y="313" font-size="21" text-anchor="end">秒</text>
+    <text x="370" y="369" font-size="22" text-anchor="middle" fill="#43645b">绿点为采样点，橙点为插值过界点</text>
+  </g>
+</svg>

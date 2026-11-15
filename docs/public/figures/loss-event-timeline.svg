@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="330" viewBox="0 0 720 330" role="img" aria-labelledby="title desc" xml:lang="zh-CN">
+  <title id="title">限功率与故障停机重叠时的分段归因</title>
+  <desc id="desc">算例中限功率从第 2 分钟持续至第 7 分钟，故障停机从第 5 分钟持续至第 9 分钟。第 5 至 7 分钟重叠，按本例故障优先。归因把第 2 至 5 分钟计入限功率，第 5 至 9 分钟计入故障。</desc>
+  <g font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" fill="#213832">
+    <rect x="1" y="1" width="718" height="328" rx="14" fill="#f5faf7" stroke="#c0d5c9" stroke-width="2"/>
+    <rect x="395" y="77" width="106" height="90" fill="#e9e1eb"/>
+    <text x="448" y="57" font-size="25" font-weight="700" text-anchor="middle" fill="#684d6a">重叠 5–7 分钟</text>
+    <g font-size="23" font-weight="600" text-anchor="end">
+      <text x="123" y="102">限功率</text>
+      <text x="123" y="152">故障停机</text>
+      <text x="123" y="229">归因结果</text>
+    </g>
+    <path d="M130 95H660M130 145H660" fill="none" stroke="#c9d6d0" stroke-width="2"/>
+    <rect x="236" y="82" width="265" height="26" rx="6" fill="#b5681c"/>
+    <rect x="395" y="132" width="212" height="26" rx="6" fill="#78516e"/>
+    <path d="M395 168v27M501 168v27" stroke="#816887" stroke-width="2" stroke-dasharray="4 4"/>
+    <rect x="130" y="201" width="106" height="41" fill="#e1ebe5"/>
+    <rect x="236" y="201" width="159" height="41" fill="#f0d9b6"/>
+    <rect x="395" y="201" width="212" height="41" fill="#e5d9e6"/>
+    <rect x="607" y="201" width="53" height="41" fill="#e1ebe5"/>
+    <g font-size="23" font-weight="700" text-anchor="middle">
+      <text x="183" y="230">正常</text>
+      <text x="315" y="230" fill="#84450d">限功率</text>
+      <text x="501" y="230" fill="#684d6a">故障</text>
+      <text x="634" y="229" font-size="19">正常</text>
+    </g>
+    <path d="M130 262H660M130 257v10M236 257v10M395 257v10M501 257v10M607 257v10M660 257v10" fill="none" stroke="#59716a" stroke-width="2"/>
+    <g font-size="22" text-anchor="middle">
+      <text x="130" y="293">0</text><text x="236" y="293">2</text>
+      <text x="395" y="293">5</text><text x="501" y="293">7</text>
+      <text x="607" y="293">9</text><text x="660" y="293">10</text>
+    </g>
+    <text x="660" y="319" font-size="20" text-anchor="end">时间（分钟）</text>
+  </g>
+</svg>

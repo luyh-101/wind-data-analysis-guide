@@ -1,0 +1,235 @@
+.vp-doc .lesson-figure {
+  margin: 1.5rem 0;
+  padding: clamp(1rem, 2.5vw, 1.4rem);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  background: #f3f7f4;
+}
+
+.lesson-title {
+  display: block;
+  color: var(--vp-c-text-1);
+  font-size: 1.15em;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.vp-doc .lesson-note {
+  margin: 0.4rem 0 0.9rem;
+  color: var(--vp-c-text-2);
+  font-size: var(--tutorial-note-size);
+}
+
+.vp-doc .lesson-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  padding: 0;
+  margin: 0.9rem 0;
+  list-style: none;
+}
+
+.vp-doc .lesson-grid > * {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.16rem;
+  margin: 0;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  background: var(--vp-c-bg);
+  line-height: 1.5;
+}
+
+.lesson-grid dt,
+.lesson-grid strong {
+  font-weight: 700;
+}
+
+.lesson-grid dd {
+  margin: 0;
+}
+
+.lesson-value {
+  color: var(--vp-c-brand-1);
+  font-variant-numeric: tabular-nums;
+  font-size: 1.12em;
+  font-weight: 700;
+}
+
+.vp-doc .lesson-result {
+  margin: 0.9rem 0 0;
+  padding: 0.55rem 0.75rem;
+  border-inline-start: 3px solid var(--vp-c-brand-1);
+  background: #e7f4ee;
+}
+
+.lesson-timeline {
+  --track-edge: 1.2rem;
+  padding-inline: var(--track-edge);
+  font-size: 0.87em;
+  font-variant-numeric: tabular-nums;
+}
+
+.lesson-axis {
+  display: flex;
+  justify-content: space-between;
+  margin-inline: calc(-1 * var(--track-edge));
+}
+
+.lesson-ticks {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  border-bottom: 2px solid #7a9c93;
+  position: relative;
+}
+
+.lesson-ticks::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  height: 0.55rem;
+  border-right: 1px solid #7a9c93;
+}
+
+.lesson-ticks span {
+  display: block;
+  width: 0.38rem;
+  height: 0.38rem;
+  background: var(--vp-c-brand-1);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 0.26rem;
+}
+
+.lesson-window {
+  position: relative;
+  height: 0.55rem;
+  margin-top: 0.5rem;
+  background: #c0ded4;
+  border-radius: 4px;
+}
+
+.lesson-window-center {
+  position: absolute;
+  inset-inline-start: 50%;
+  inset-block: 0;
+  width: 3px;
+  transform: translateX(-50%);
+  background: var(--vp-c-brand-1);
+}
+
+.lesson-coverage-track,
+.lesson-bar-track {
+  display: flex;
+  gap: 2px;
+  height: 0.75rem;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #dce7e1;
+}
+
+.lesson-segment-both { background: #19695d; }
+.lesson-segment-nacelle { background: #42678d; }
+.lesson-segment-lidar { background: #9d461d; }
+.lesson-segment-neither { background: #697671; }
+
+.lesson-swatch {
+  display: inline-block;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin-inline-end: 0.45rem;
+  border-radius: 2px;
+}
+
+.lesson-coverage-key {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.15rem 1rem;
+  margin: 0.65rem 0 0;
+  font-size: var(--tutorial-note-size);
+}
+
+.lesson-coverage-key > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0 0.5rem;
+}
+
+.lesson-coverage-key dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+.lesson-bar-row {
+  width: 100%;
+  margin-block: 0.2rem 0.35rem;
+  font-size: var(--tutorial-note-size);
+}
+
+.lesson-bar-row > div:first-child {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0 1em;
+  font-variant-numeric: tabular-nums;
+}
+
+.lesson-bar-track span {
+  background: #19695d;
+}
+
+.lesson-bar-row:nth-child(2) .lesson-bar-track span {
+  background: #42678d;
+}
+
+@media (max-width: 639px) {
+  .vp-doc .lesson-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 380px) {
+  .lesson-coverage-key {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.linked-scatter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-block: 1.25rem;
+}
+
+.linked-scatter-grid figure {
+  margin: 0;
+  min-width: 0;
+}
+
+.linked-scatter-grid a {
+  display: block;
+  border-radius: 8px;
+}
+
+.linked-scatter-grid img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+}
+
+.linked-scatter-grid figcaption {
+  margin-top: 0.4rem;
+  text-align: center;
+  font-size: var(--tutorial-note-size);
+  font-weight: 600;
+}
+
+@media (max-width: 750px) {
+  .linked-scatter-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,380 @@
+:root {
+  --vp-c-brand-1: #145f55;
+  --vp-c-brand-2: #1a6d61;
+  --vp-c-brand-3: #145f55;
+  --vp-c-brand-soft: #e7f4ee;
+  --vp-font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+  --vp-home-hero-name-color: #17312e;
+  --vp-c-bg: #fcfdfb;
+  --vp-c-bg-soft: #f1f5f2;
+  --vp-c-text-1: #19322f;
+  --vp-c-text-2: #3e5650;
+  --vp-c-divider: #d9e4df;
+  --vp-sidebar-width: 288px;
+  /* 常用字号和正文栏宽。窄屏取值见文件底部的媒体查询。 */
+  --tutorial-text-size: 1.1875rem;
+  --tutorial-line-height: 1.8;
+  --tutorial-table-size: 1.125rem;
+  --tutorial-nav-size: 1.0625rem;
+  --tutorial-note-size: 1.0625rem;
+  --tutorial-card-size: 1.125rem;
+  --tutorial-reading-width: 56rem;
+}
+
+.vp-doc {
+  font-size: var(--tutorial-text-size);
+  line-height: var(--tutorial-line-height);
+  overflow-wrap: anywhere;
+}
+
+.VPContent .VPDoc.has-aside .content-container {
+  max-width: var(--tutorial-reading-width);
+}
+
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4 {
+  font-weight: 650;
+  letter-spacing: normal;
+  text-wrap: pretty;
+}
+
+.vp-doc h1 {
+  font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.375rem);
+  line-height: 1.3;
+}
+
+.vp-doc h2 {
+  margin-block: 2.6rem 0.9rem;
+  padding-block-start: 1.3rem;
+  font-size: clamp(1.5rem, 1.27rem + 0.5vw, 1.8125rem);
+  line-height: 1.4;
+}
+
+.vp-doc h2 .header-anchor {
+  top: 1.3rem;
+}
+
+.vp-doc h3 {
+  margin-block: 1.9rem 0.5rem;
+  font-size: clamp(1.25rem, 1.1rem + 0.3vw, 1.4375rem);
+  line-height: 1.45;
+}
+
+.vp-doc h4 {
+  font-size: 1.1875rem;
+  line-height: 1.5;
+}
+
+.vp-doc p,
+.vp-doc summary,
+.vp-doc ul,
+.vp-doc ol {
+  margin-block: 1rem;
+}
+
+.vp-doc p {
+  line-height: inherit;
+}
+
+.vp-doc li + li {
+  margin-block-start: 0.45em;
+}
+
+.vp-doc :is(ul, ol) {
+  padding-inline-start: 1.5em;
+}
+
+.vp-doc li > :is(ul, ol) {
+  margin-block: 0.45em 0;
+}
+
+.vp-doc blockquote > p {
+  font-size: inherit;
+}
+
+.vp-doc .custom-block {
+  margin-block: 1.25rem;
+  padding: 1rem 1.125rem;
+  font-size: var(--tutorial-note-size);
+  line-height: 1.75;
+}
+
+.vp-doc .custom-block p {
+  line-height: inherit;
+}
+
+.vp-doc .custom-block .custom-block-title {
+  font-weight: 650;
+}
+
+.vp-doc table {
+  max-width: 100%;
+  margin-block: 1.4rem;
+  font-size: var(--tutorial-table-size);
+  line-height: 1.65;
+  overscroll-behavior-x: contain;
+}
+
+.vp-doc th,
+.vp-doc td {
+  padding: 0.75rem 0.9rem;
+  font-size: inherit;
+  line-height: inherit;
+  vertical-align: top;
+  white-space: normal;
+}
+
+.vp-doc th {
+  background-color: #eaf2ed;
+  color: var(--vp-c-text-1);
+  font-weight: 650;
+}
+
+.vp-doc table:not(:has(tbody td[style*="right"])) tbody td:first-child {
+  font-weight: 600;
+}
+
+/* 两列表格优先完整显示短标签；长标签保留正常换行。 */
+.vp-doc table:not(:has(thead th:nth-child(3))) :is(th, td):first-child {
+  min-width: 6.5em;
+  white-space: nowrap;
+}
+
+.vp-doc table:not(:has(thead th:nth-child(3))) td:first-child:has(.keep-phrase) {
+  white-space: normal;
+}
+
+.vp-doc table:not(:has(thead th:nth-child(3))) td:nth-child(2) a:last-child,
+.vp-doc .keep-phrase {
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+
+.vp-doc table :is(th, td):first-child {
+  text-wrap: balance;
+}
+
+.vp-doc table:not(:has(thead th:nth-child(4), tbody td[style*="right"]))
+  tbody td:first-child:has(.keep-phrase) {
+  word-break: keep-all;
+  overflow-wrap: normal;
+}
+
+.vp-doc td[style*="text-align:right"],
+.vp-doc td[style*="text-align: right"] {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.vp-doc p:has(> img:only-child) {
+  margin-block: 1.5rem 0.65rem;
+}
+
+.vp-doc p > img:only-child {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+}
+
+.vp-doc p:has(> img:only-child) + p:has(> em:first-child) {
+  margin-block: 0.65rem 1.5rem;
+  font-size: var(--tutorial-note-size);
+  line-height: 1.65;
+  color: var(--vp-c-text-2);
+}
+
+.vp-doc p:has(> img:only-child) + p > em:first-child {
+  font-style: normal;
+}
+
+.vp-doc :not(pre) > code {
+  font-size: 0.9em;
+}
+
+.VPSidebar .VPSidebarItem .text,
+.VPNavBarMenu .VPNavBarMenuLink,
+.VPNavScreen .VPNavScreenMenuLink,
+.VPLocalNav .menu,
+.VPLocalNavOutlineDropdown .menu-text,
+.VPLocalNavOutlineDropdown .top-link,
+.VPDocFooter .pager-link .title,
+.VPNavBarSearch .DocSearch-Button .DocSearch-Button-Placeholder {
+  font-size: var(--tutorial-nav-size);
+}
+
+.VPNavBar .VPNavBarTitle .title {
+  font-size: 1.125rem;
+}
+
+.VPSidebar .VPSidebarItem .text,
+.VPDocFooter .pager-link .title {
+  line-height: 1.55;
+}
+
+.VPSidebar .VPSidebarItem .text {
+  padding-block: 0.34rem;
+  overflow-wrap: anywhere;
+}
+
+.VPSidebar .VPSidebarItem.is-active > .item .text {
+  font-weight: 700;
+}
+
+.VPDocAsideOutline .outline-title,
+.VPDocOutlineItem .outline-link {
+  font-size: var(--tutorial-nav-size);
+}
+
+.VPDocAsideOutline .outline-link {
+  padding-block: 0.25rem;
+  line-height: 1.5;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.VPLocalSearchBox .result .title {
+  font-size: var(--tutorial-nav-size);
+}
+
+.VPHomeHero .image-src {
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+.VPHomeHero .image-container {
+  width: min(78vw, 335px);
+  height: auto;
+  aspect-ratio: 16 / 10;
+  transform: none;
+}
+
+.VPHomeHero .image {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 28px;
+}
+
+.VPHomeHero .text {
+  font-size: clamp(1.625rem, 4vw, 2.625rem);
+  line-height: 1.26;
+  letter-spacing: 0;
+}
+
+.VPHomeHero .name {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+}
+
+.VPHomeHero .tagline {
+  max-width: 38em;
+  font-size: var(--tutorial-text-size);
+  line-height: var(--tutorial-line-height);
+}
+
+.VPHomeHero .VPButton.medium,
+.VPHomeHero .VPButton.big {
+  font-size: var(--tutorial-nav-size);
+}
+
+.VPHomeFeatures .VPFeature .title {
+  font-size: 1.3125rem;
+  line-height: 1.45;
+}
+
+.VPHomeFeatures .VPFeature .details {
+  font-size: var(--tutorial-card-size);
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+.VPHomeFeatures .VPFeature .link-text-value {
+  font-size: var(--tutorial-nav-size);
+  font-weight: 600;
+}
+
+.VPHome .vp-doc .home-reading {
+  max-width: var(--tutorial-reading-width);
+  margin: 40px auto 0;
+  padding: 0 24px;
+}
+
+@media (max-width: 639px) {
+  :root {
+    --tutorial-text-size: 1.125rem;
+    --tutorial-line-height: 1.75;
+    --tutorial-table-size: 1.0625rem;
+    --tutorial-nav-size: 1rem;
+    --tutorial-note-size: 1rem;
+    --tutorial-card-size: 1.0625rem;
+  }
+
+  .VPContent .VPDoc,
+  .VPHome .vp-doc .home-reading {
+    padding-inline: 1.25rem;
+  }
+
+  .vp-doc div[class*='language-'] {
+    margin-inline: 0;
+  }
+
+  .vp-doc th,
+  .vp-doc td {
+    min-width: 6rem;
+    padding: 0.55rem 0.65rem;
+  }
+
+  .vp-doc table:has(thead th:nth-child(3)):not(:has(thead th:nth-child(4)))
+    :is(th, td):first-child {
+    min-width: 4.5rem;
+  }
+
+  .vp-doc table:has(thead th:nth-child(3)):not(:has(thead th:nth-child(4)))
+    :is(th, td):nth-child(3) {
+    min-width: 8rem;
+  }
+
+  .vp-doc table:not(:has(thead th:nth-child(3))) :is(th, td):nth-child(2) {
+    min-width: 12rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .VPHome .VPHomeHero {
+    padding-block: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 3.25rem) 2.75rem;
+  }
+
+  .VPHomeHero .image {
+    margin: 0 0 0 34px;
+    align-self: center;
+  }
+
+  .VPHomeHero .image-container {
+    width: 100%;
+  }
+
+  .vp-doc table:has(thead th:nth-child(3)):not(:has(thead th:nth-child(4), tbody td[style*="right"]))
+    :is(th, td):first-child {
+    width: 25%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .VPContent .VPDoc.has-aside {
+    padding-inline: 1.5rem;
+  }
+
+  .VPContent .VPDoc .content {
+    min-width: 0;
+    padding-inline: clamp(0.75rem, calc(3.5vw - 2rem), 2rem);
+  }
+}

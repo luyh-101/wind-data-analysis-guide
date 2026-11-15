@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="340" viewBox="0 0 720 340" role="img" aria-labelledby="title desc" xml:lang="zh-CN">
+  <title id="title">变桨指令与叶片反馈的两种走势</title>
+  <desc id="desc">在三片叶片接到相同指令的示意中，左图三片叶片的实际角度几乎重合，均跟上指令。右图有两片跟随指令，第三片叶片的实际角度仍停留在原位置。</desc>
+  <g font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" fill="#193530">
+    <rect x="1" y="1" width="718" height="338" rx="14" fill="#f5faf7" stroke="#bfd4cb" stroke-width="2"/>
+    <g font-size="26" font-weight="700" text-anchor="middle">
+      <text x="184" y="45">三片都跟随指令</text>
+      <text x="547" y="45">叶片 3 未跟上</text>
+    </g>
+    <g font-size="21" fill="#4c645a">
+      <text x="43" y="83">桨距角</text>
+      <text x="404" y="83">桨距角</text>
+      <text x="270" y="268">时间</text>
+      <text x="631" y="268">时间</text>
+    </g>
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M49 94v146h272M410 94v146h272" stroke="#779287" stroke-width="2"/>
+      <path d="M64 203h97v-73h151M425 203h97v-73h151" stroke="#5b6168" stroke-width="3" stroke-dasharray="5 6"/>
+      <path d="M64 209h99q12 0 18-19l12-37q5-16 21-16h98M425 209h99q12 0 18-19l12-37q5-16 21-16h98" stroke="#166c60" stroke-width="5"/>
+      <path d="M425 211h248" stroke="#a0522c" stroke-width="4" stroke-dasharray="12 5"/>
+      <path d="M42 307h36" stroke="#5b6168" stroke-width="3" stroke-dasharray="5 6"/>
+      <path d="M231 307h36" stroke="#166c60" stroke-width="5"/>
+      <path d="M475 307h36" stroke="#a0522c" stroke-width="4" stroke-dasharray="12 5"/>
+    </g>
+    <g font-size="21">
+      <text x="88" y="314">共同指令</text>
+      <text x="276" y="314">跟上的反馈</text>
+      <text x="520" y="314">未跟上的反馈</text>
+    </g>
+  </g>
+</svg>
