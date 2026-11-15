@@ -30,6 +30,17 @@ import { withBase } from 'vitepress'
 | Kelmarsh | [对照三片叶片和两台机组的角度](/pitch#逐叶片和跨机组对照) | <a :href="withBase('/data/kelmarsh-blade-pitch.csv')" download>逐叶片记录</a> |
 | AWAKEN King Plains | [工况筛选](/scada#实测案例-有效记录与合格工况) → [风速拟合](/wind-speed#怎样读两路风速配对散点图) → [功率验证](/power#用实测记录复算一次)。单独看风频可从[雷达风频](/wind-frequency#用现场雷达的公开记录复算)开始。 | <a :href="withBase('/data/awaken-wt041-scada-1min.csv')" download>机组记录</a> · <a :href="withBase('/data/awaken-a1-lidar-80m-10min.csv')" download>雷达记录</a> · <a :href="withBase('/data/awaken-a1-wt041-2023-08-24.csv')" download>配对表</a> |
 
+**来源、时段与许可**
+
+| 案例 | 来源 | 时段 | 许可 |
+| --- | --- | --- | --- |
+| Aventa AV-7 | Barber、Hammer、Marykovskiy，[Zenodo 10.5281/zenodo.16738078](https://doi.org/10.5281/zenodo.16738078) | 2025-06-04–10 | CC BY 4.0 |
+| ENGIE La Haute Borne | ENGIE Renewables，[OpenOA 示例归档](https://github.com/NatLabRockies/OpenOA#example-notebooks-and-data) | 2014-02–03 | Etalab Open Licence 2.0 |
+| Kelmarsh | Plumley（Cubico），[Zenodo 10.5281/zenodo.8252025](https://doi.org/10.5281/zenodo.8252025) | 2016-07 | CC BY 4.0 |
+| AWAKEN King Plains | Bodini 等，[Zenodo 10.5281/zenodo.15623845](https://doi.org/10.5281/zenodo.15623845) | 2023-08-24 | CC BY 4.0 |
+
+版本、字段对照和数据处理细节见[案例数据说明](/data/case-data-notes.txt)。
+
 <span id="公开案例的来源与字段" aria-hidden="true"></span>
 
 ### 数据处理复现

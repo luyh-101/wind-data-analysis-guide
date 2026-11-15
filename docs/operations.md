@@ -51,20 +51,22 @@ import { withBase } from 'vitepress'
 
 三张图共用 Aventa AV-7 的 10,032 条分钟记录。绿色为正功率，棕色为零或负功率。点击图表可查看原图。[三图案例 CSV](/data/aventa-linked-scatter.csv)
 
+AV-7 是约 6 kW 的小型研究机组。下面用它的控制参数和功率水平讲概念；这些数值不能直接套用到 MW 级机组。
+
 <ol class="scatter-reading">
-  <li><figure class="tutorial-figure"><a :href="withBase('/figures/wind-generator.png')" target="_blank" rel="noopener"><img src="/figures/aventa-wind-speed.png" width="1020" height="562" loading="lazy" alt="风速–发电机转速图框出了约 750–780 r/min 的水平点群。" /></a><figcaption><strong>先看风速–发电机转速</strong> 约 750–780 r/min 的横向点群标出案例中的高转速运行区间，可据此筛出平台段的记录。</figcaption></figure></li>
-  <li><figure class="tutorial-figure"><a :href="withBase('/figures/generator-power.png')" target="_blank" rel="noopener"><img src="/figures/aventa-speed-power.png" width="1020" height="562" loading="lazy" alt="发电机转速–有功功率图框出了右侧同一转速附近纵向分散的功率点。" /></a><figcaption><strong>再看发电机转速–有功功率</strong> 看右上角约 750–780 r/min 的点带：转速变化范围窄，功率仍约为 5.92–6.78 kW。判断是否接近额定出力，要读取功率。</figcaption></figure></li>
-  <li><figure class="tutorial-figure"><a :href="withBase('/figures/wind-pitch.png')" target="_blank" rel="noopener"><img src="/figures/aventa-wind-pitch.png" width="1020" height="562" loading="lazy" alt="风速–桨距角图框出了低风速的多条角度点带，其中约 39 度的一带有棕色记录。" /></a><figcaption><strong>最后对照风速–桨距角</strong> 低风速下出现多条角度带，约 39° 的点带含零功率记录。这些点带提供了按运行状态分组的线索。</figcaption></figure></li>
+  <li><figure class="tutorial-figure"><a :href="withBase('/figures/aventa-wind-speed.png')" target="_blank" rel="noopener"><img src="/figures/aventa-wind-speed.png" width="1020" height="562" loading="lazy" alt="风速–发电机转速图框出了约 750–780 r/min 的水平点群。" /></a><figcaption><strong>先看风速–发电机转速</strong> 约 750–780 r/min 的横向点群标出案例中的高转速运行区间，可据此筛出平台段的记录。</figcaption></figure></li>
+  <li><figure class="tutorial-figure"><a :href="withBase('/figures/aventa-speed-power.png')" target="_blank" rel="noopener"><img src="/figures/aventa-speed-power.png" width="1020" height="562" loading="lazy" alt="发电机转速–有功功率图框出了右侧同一转速附近纵向分散的功率点。" /></a><figcaption><strong>再看发电机转速–有功功率</strong> 看右上角约 750–780 r/min 的点带：转速变化范围窄，功率仍约为 5.92–6.78 kW。判断是否接近额定出力，要读取功率。</figcaption></figure></li>
+  <li><figure class="tutorial-figure"><a :href="withBase('/figures/aventa-wind-pitch.png')" target="_blank" rel="noopener"><img src="/figures/aventa-wind-pitch.png" width="1020" height="562" loading="lazy" alt="风速–桨距角图框出了低风速的多条角度点带，其中约 39 度的一带有棕色记录。" /></a><figcaption><strong>最后对照风速–桨距角</strong> 低风速下出现多条角度带，约 39° 的点带含零功率记录。这些点带提供了按运行状态分组的线索。</figcaption></figure></li>
 </ol>
 
 用时间戳把三张图连起来。每张图从同一行取对应的两列来定位同一条记录。
 
 | 时间（2025-06-04 UTC） | 风速（m/s） | 发电机转速（r/min） | 功率（kW） | 桨距角（°） |
 | --- | ---: | ---: | ---: | ---: |
-| 21:44 | 5.61 | 753 | 6.12 | 17.16 |
 | 00:00 | 1.27 | 0 | 0 | 38.86 |
+| 21:44 | 5.61 | 753 | 6.12 | 17.16 |
 
-21:44 在第一张图位于约 753 r/min 的平台段，第二张图对应 6.12 kW，接近该机组 6 kW 的标称功率。00:00 的转速和功率均为零，第三张图中约 39° 的桨距角对应这里的一条非发电记录。
+00:00 的转速和功率均为零，第三张图中约 39° 的桨距角对应这里的一条非发电记录。21:44 在第一张图位于约 753 r/min 的平台段，第二张图对应 6.12 kW，接近该机组约 6 kW 的标称功率。
 
 [跨机组出现不同点带时的判读方法](/practice#控制表现与多信号复核)
 
