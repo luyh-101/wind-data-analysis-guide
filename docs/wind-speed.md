@@ -11,7 +11,7 @@ import CaseWalkthrough from './.vitepress/theme/components/CaseWalkthrough.vue'
 
 <figure class="tutorial-figure">
   <a :href="withBase('/figures/wind-measurements.svg')" target="_blank" rel="noopener"><img src="/figures/wind-measurements.svg" width="720" height="338" loading="lazy" alt="从侧面画出测风塔上的风速测点、地基激光雷达的测层以及风机机舱后方的风速计。" /></a>
-  <figcaption><strong>测风位置与高度</strong> 机舱读数受安装位置附近的气流影响，雷达反映其测层的风况。比较时记录测点位置、测高和风向，以区分来流差异与读数差异。</figcaption>
+  <figcaption><strong>测风位置与高度</strong> 机舱读数受安装位置附近的气流影响，雷达反映其测层的风况。位置和高度不同，同一时窗的两路读数也可能有差别。</figcaption>
 </figure>
 
 ## 时间配对、偏差分析与拟合 {#怎样配对和拟合}
@@ -22,7 +22,7 @@ import CaseWalkthrough from './.vitepress/theme/components/CaseWalkthrough.vue'
 
 ## 独立时段验证与适用范围
 
-用较早时段估计修正量和模型参数，再用独立的后续时段检验。令每个验证窗口的误差为“估算风速 − 雷达风速”，用同一批窗口计算两项指标。
+拟合段用来定修正量、斜率和截距。留出段只用来计算误差，参数在这一步保持固定。每窗的误差取“估算风速 − 雷达风速”。
 
 | 指标 | 计算方法 | 判读 |
 | --- | --- | --- |
@@ -33,7 +33,7 @@ import CaseWalkthrough from './.vitepress/theme/components/CaseWalkthrough.vue'
 
 ## 实测案例：时间对齐与散点图判读 {#怎样读两路风速配对散点图}
 
-AWAKEN 案例比较 A1 地基雷达 80 m 层与 WT041 的机舱数据。发布方已经用机舱风速传递函数修正 WT041 的风速，发布字段对应轮毂高度（约 89 m）。两路观测的地点和高度不同，拟合描述的是这两个测点在本案例条件下的关系。
+本例对照 A1 雷达 80 m 层风速与 WT041 修正后的机舱风速。后者来自 SCADA，发布时已通过机舱风速传递函数换算为约 89 m 轮毂高度的风速。
 
 <CaseWalkthrough example="pairing" />
 
@@ -49,8 +49,8 @@ AWAKEN 案例比较 A1 地基雷达 80 m 层与 WT041 的机舱数据。发布�
 38 个验证窗口中有 37 个落在拟合所用的机舱风速范围内。误差图和下表均使用这 37 个共同窗口。 [风速配对数据](/data/awaken-a1-wt041-2023-08-24.csv)
 
 <figure class="tutorial-figure">
-  <a :href="withBase('/figures/wind-fit-errors.png')" target="_blank" rel="noopener"><img src="/figures/wind-fit-errors.png" width="1050" height="615" loading="lazy" alt="共同窗口的估算误差对照。横轴为机舱风速，纵轴为估算风速减雷达风速，图中比较直接使用机舱风速与直线拟合。" /></a>
-  <figcaption><strong>留出窗口的风速估算误差</strong> 点离零线越近，估算误差越小。蓝叉为直接使用机舱读数，青绿空心点为拟合结果。</figcaption>
+  <a :href="withBase('/figures/wind-fit-errors.png')" target="_blank" rel="noopener"><img src="/figures/wind-fit-errors.png" width="1050" height="615" loading="lazy" alt="37 个共同验证窗口的绝对误差变化。横轴为窗口次序，纵轴为拟合后的绝对误差减去直接用机舱风速的绝对误差。零线以下有 21 柱，以上有 16 柱。" /></a>
+  <figcaption><strong>拟合在每个窗口改善了多少</strong> 每根柱比较同一窗。零线以下表示拟合后误差变小，以上表示变大。这 37 个窗口中有 21 个改善、16 个变差。</figcaption>
 </figure>
 
 | 估算方法 | 共同窗口 MAE（m/s） | 平均有符号误差（m/s） |
@@ -59,4 +59,4 @@ AWAKEN 案例比较 A1 地基雷达 80 m 层与 WT041 的机舱数据。发布�
 | 机舱风速减去拟合段的平均差值 0.29 m/s | 0.97 | −0.73 |
 | 雷达估算值 ≈ 0.223 × 机舱风速 + 5.177 m/s | 0.69 | +0.18 |
 
-在这 37 个窗口中，直线拟合把 MAE 从 0.81 降到 0.69 m/s，平均高估 0.18 m/s。固定修正使原有低估加重，MAE 反而升至 0.97 m/s。按这一天的留出结果，三种方法中应优先选直线拟合。
+表中直线拟合的 MAE 最低，为 0.69 m/s，但图上仍有部分窗口误差增大。固定修正则加重了这一天的整体低估。选模型时，可先用 MAE 排序，再检查误差增大的窗口是否集中在项目关心的风速段。

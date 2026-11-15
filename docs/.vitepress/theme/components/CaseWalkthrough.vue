@@ -32,7 +32,7 @@ const fmtKw = value => new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 1
       <div><dt>WT041 机舱</dt><dd>00:00–00:09，共 10 条分钟记录</dd><dd class="lesson-value">{{ fmt(data.pairing.nacelle) }} m/s</dd></div>
       <div><dt>A1 雷达</dt><dd>00:05 是整段窗口的中点标记</dd><dd class="lesson-value">{{ fmt(data.pairing.lidar) }} m/s</dd></div>
     </dl>
-    <p class="lesson-result">将机舱的 10 条记录汇总后，按窗口起点 00:00 与雷达记录配对。机舱平均风速减去雷达风速，差值为 <strong>{{ fmt(delta) }} m/s</strong>。</p>
+    <p class="lesson-result">雷达记录的时间减去 5 分钟后，和机舱汇总记录用同一个起点 00:00 配对。机舱均值减去雷达读数，差值为 <strong>{{ fmt(delta) }} m/s</strong>。</p>
   </figure>
 
   <figure v-else-if="example === 'coverage'" class="lesson-figure" aria-labelledby="coverage-caption">

@@ -8,11 +8,11 @@ import { withBase } from 'vitepress'
 
 散点图能指出哪些变量一起变化。按时间戳对齐后，可以进一步定位变化开始的时刻、各信号变化的先后和持续时间。
 
-下图对齐 Aventa 在 2025 年 6 月 4 日的四路分钟信号，浅色标出连续正功率的窗口。
+下图对齐 Aventa 在 2025 年 6 月 4 日的四路分钟信号。
 
 <figure class="tutorial-figure">
   <a :href="withBase('/figures/aventa-synchronized-signals.png')" target="_blank" rel="noopener"><img src="/figures/aventa-synchronized-signals.png" width="1050" height="990" loading="lazy" alt="Aventa 在 05:23 至 05:37 UTC 的四路同步时序。05:27 风速和转速上升、功率转正、桨距角下降，绿色条标出连续正功率窗口。" /></a>
-  <figcaption><strong>对齐风速、功率、转速与桨距角</strong> 从 05:27 UTC 起可定位到一段连续正功率窗口。图中是分钟记录，可读出窗口间的变化顺序，同一分钟内的动作先后需用更高频的记录。</figcaption>
+  <figcaption><strong>对齐风速、功率、转速与桨距角</strong> 从 05:27 UTC 起的浅色区域标出连续正功率窗口，可直接用该起点定位原始记录。同一分钟内各动作的先后需用更高频的记录查看。</figcaption>
 </figure>
 
 [Aventa 分钟运行数据](/data/aventa-linked-scatter.csv)

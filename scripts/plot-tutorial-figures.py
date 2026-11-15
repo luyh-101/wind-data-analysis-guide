@@ -12,7 +12,6 @@ from matplotlib import font_manager, pyplot as plt
 from matplotlib.patches import Rectangle
 from matplotlib.ticker import MaxNLocator, PercentFormatter
 
-
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "docs/public/data"
 OUTPUT = ROOT / "docs/public/figures"
@@ -24,7 +23,6 @@ AMBER = "#a04d24"
 GRID = "#dae6e4"
 HIGHLIGHT = "#e9f3ef"
 CUTOFF = pd.Timestamp("2023-08-24T16:00:00Z")
-
 
 def configure_font(font_path):
     if font_path is not None:
@@ -55,16 +53,13 @@ def configure_font(font_path):
         "figure.dpi": 150,
     })
 
-
 def csv(name, time_column):
     data = pd.read_csv(DATA / f"{name}.csv")
     data[time_column] = pd.to_datetime(data[time_column], utc=True)
     return data
 
-
 def panel(width=7, height=4.1):
     return plt.subplots(figsize=(width, height), layout="constrained")
-
 
 def axis(ax, x, y, title=None):
     ax.set(xlabel=x, ylabel=y)
@@ -72,11 +67,9 @@ def axis(ax, x, y, title=None):
     if title is not None:
         ax.set_title(title, loc="left", pad=14)
 
-
 def save(fig, name):
     fig.savefig(OUTPUT / f"{name}.png", facecolor="white")
     plt.close(fig)
-
 
 def aventa_scatter(data):
     positive = data.power_kw.gt(0)
@@ -85,8 +78,8 @@ def aventa_scatter(data):
          "generator_rpm", "发电机转速（r/min）", (4.5, 735, 14.2, 796),
          (12.5, 785), (11.8, 637), "转速平台"),
         ("aventa-speed-power", "发电机转速–有功功率", "generator_rpm", "发电机转速（r/min）",
-         "power_kw", "有功功率（kW）", (736, 2.3, 791, 6.9),
-         (748, 4.4), (342, 5.65), "相近转速下功率有差异"),
+         "power_kw", "有功功率（kW）", (750, 5.82, 780, 6.89),
+         (758, 6.35), (342, 5.65), "转速平台段的功率范围"),
         ("aventa-wind-pitch", "风速–桨距角", "wind_ms", "风速（m/s）",
          "pitch_deg", "桨距角（°）", (0, 11, 4.2, 42),
          (4.1, 39), (6.6, 48), "低风速点带"),
@@ -106,7 +99,6 @@ def aventa_scatter(data):
         axis(ax, xlabel, ylabel, title)
         ax.legend(loc="upper center", bbox_to_anchor=(.5, -.19), ncol=2, markerscale=2)
         save(fig, name)
-
 
 def sample_counts(minutes, paired):
     valid = minutes[["nacelle_ms", "power_kw", "curtailment"]].notna().all(axis=1)
@@ -128,7 +120,6 @@ def sample_counts(minutes, paired):
         ax.bar_label(bars, [f"{count:,}" for count in counts], padding=5)
     save(fig, "scada-sample-counts")
 
-
 def bin_means(data, wind, minimum):
     usable = data[[wind, "power_kw"]].dropna()
     means = usable.groupby(np.floor(usable[wind]).astype(int)).agg(
@@ -136,35 +127,18 @@ def bin_means(data, wind, minimum):
     )
     return means[means["count"] >= minimum]
 
-
 def consecutive_bins(means):
     return means.groupby(means.index.to_series().diff().ne(1).cumsum())
-
 
 def plot_bins(ax, bins, color, style, name):
     for index, (_, group) in enumerate(consecutive_bins(bins)):
         ax.plot(group.wind, group.power, color=color, linestyle=style, linewidth=2.2,
                 marker="o", markersize=4.8, label=name if index == 0 else None)
 
-
-def scada_screening(paired):
-    fig, ax = panel()
-    excluded = paired[~paired.eligible]
-    selected = paired[paired.eligible]
-    ax.axvspan(9, 10, color=HIGHLIGHT, zorder=0)
-    ax.scatter(selected.nacelle_ms, selected.power_kw, c=TEAL, alpha=.42, s=17, label="保留窗口")
-    ax.scatter(excluded.nacelle_ms, excluded.power_kw, c=AMBER, marker="x", s=24, label="排除窗口")
-    plot_bins(ax, bin_means(paired, "nacelle_ms", 3), BLUE, "--", "筛选前分箱均值")
-    plot_bins(ax, bin_means(selected, "nacelle_ms", 3), TEAL, "-", "筛选后分箱均值")
-    axis(ax, "机舱风速（m/s）", "有功功率（kW）", "工况筛选怎样改变功率曲线")
-    ax.legend(loc="upper left", fontsize=10)
-    save(fig, "scada-screening")
-
-
 def wind_fit(train, test):
     slope, intercept = np.polyfit(train.nacelle_ms, train.lidar_ms, 1)
     low, high = train.nacelle_ms.agg(["min", "max"])
-    common = test[test.nacelle_ms.between(low, high)]
+    common = test[test.nacelle_ms.between(low, high)].sort_values("window_start_utc")
     fitted = slope * common.nacelle_ms + intercept
 
     fig, ax = panel()
@@ -181,16 +155,18 @@ def wind_fit(train, test):
     ax.legend(loc="lower right", fontsize=9.5, frameon=True, framealpha=.95, edgecolor=GRID)
     save(fig, "wind-pairs")
 
+    raw_error = (common.nacelle_ms - common.lidar_ms).abs()
+    change = (fitted - common.lidar_ms).abs() - raw_error
+    positions = np.arange(1, len(change) + 1)
     fig, ax = panel()
-    ax.axhline(0, color=MUTED, linestyle="--", linewidth=1.3)
-    ax.scatter(common.nacelle_ms, common.nacelle_ms - common.lidar_ms, marker="x",
-               c=BLUE, s=42, label="直接使用机舱风速")
-    ax.scatter(common.nacelle_ms, fitted - common.lidar_ms, edgecolors=TEAL, s=29,
-               facecolors="none", linewidths=1.55, label="直线拟合估算")
-    axis(ax, "WT041 机舱风速（m/s）", "估算风速 − 雷达风速（m/s）", "共同验证窗口的估算误差")
-    ax.legend(loc="best", fontsize=10)
+    ax.axhline(0, color=MUTED, linewidth=1.3)
+    ax.bar(positions, change, color=np.where(change < 0, TEAL, AMBER), width=.75)
+    axis(ax, "验证窗口（按 UTC 时间排序）", "绝对误差变化（m/s）", "拟合后绝对误差的变化")
+    ax.xaxis.set_major_locator(MaxNLocator(nbins=6, integer=True))
+    ax.margins(y=.12)
+    ax.text(.98, .96, "误差增大", transform=ax.transAxes, ha="right", va="top", color=AMBER)
+    ax.text(.98, .04, "误差减小", transform=ax.transAxes, ha="right", va="bottom", color=TEAL)
     save(fig, "wind-fit-errors")
-
 
 def estimate(wind, bins):
     """Interpolate only between consecutive retained wind-speed bins."""
@@ -198,7 +174,6 @@ def estimate(wind, bins):
         if group.wind.iloc[0] <= wind <= group.wind.iloc[-1]:
             return np.interp(wind, group.wind, group.power)
     return np.nan
-
 
 def power_curves(train, test):
     fig, axes = plt.subplots(1, 2, figsize=(8.4, 4.2), sharex=True, sharey=True,
@@ -232,7 +207,6 @@ def power_curves(train, test):
     ax.legend(loc="lower right", fontsize=10)
     save(fig, "power-validation")
 
-
 def weibull_frequency(lidar):
     speeds = np.sort(lidar.lidar_ms.to_numpy())
     n = len(speeds)
@@ -252,7 +226,6 @@ def weibull_frequency(lidar):
     axis(ax, "雷达风速（m/s）", "频率密度（% / (m/s)）", "A1 雷达风速分布与 Weibull 拟合")
     ax.legend(loc="upper right", fontsize=10)
     save(fig, "lidar-wind-frequency")
-
 
 def synchronized_signals(aventa):
     start = pd.Timestamp("2025-06-04T05:23:00Z")
@@ -283,7 +256,6 @@ def synchronized_signals(aventa):
     axes[-1].set_xticks([0, 4, 8, 12, 14], ["05:23", "05:27", "05:31", "05:35", "05:37"])
     save(fig, "aventa-synchronized-signals")
 
-
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--font", type=Path, help="中文字体文件（可选）")
@@ -299,12 +271,10 @@ def main():
     test = eligible[eligible.window_start_utc >= CUTOFF]
     aventa_scatter(aventa)
     sample_counts(minutes, paired)
-    scada_screening(paired)
     wind_fit(train, test)
     power_curves(train, test)
     weibull_frequency(lidar)
     synchronized_signals(aventa)
-
 
 if __name__ == "__main__":
     main()

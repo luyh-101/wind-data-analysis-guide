@@ -35,10 +35,10 @@ import CaseWalkthrough from './.vitepress/theme/components/CaseWalkthrough.vue'
 
 <figure class="tutorial-figure">
   <a :href="withBase('/figures/power-curves.png')" target="_blank" rel="noopener"><img src="/figures/power-curves.png" width="1260" height="630" loading="lazy" alt="并排对比 A1 雷达和 WT041 机舱风速的原始功率散点。每个圆点表示一个箱的平均风速与平均功率，曲线仅连接相邻箱。" /></a>
-  <figcaption><strong>风速分箱与功率建模</strong> 淡点是同一台机组的实测功率。实心点是箱内平均值，连线用于插值。机舱曲线在所示区间上升较平顺，雷达曲线高风速端有回落。</figcaption>
+  <figcaption><strong>风速分箱与功率建模</strong> 同一窗口的有功功率在左右图相同，只有横坐标换成了另一测点的风速。淡点是单窗记录，实心点是同箱记录的平均风速与平均功率，线段连接相邻箱的均值。</figcaption>
 </figure>
 
-以 16:00 UTC 窗口为例。雷达测到 6.10 m/s，先到雷达曲线上找它左右两侧的点，按风速间距对功率插值。
+16:00 UTC 的雷达风速为 6.10 m/s，落在 5.61 和 6.53 m/s 两个相邻点之间。它离左端约占两点间距的 53%，因此取左端功率加上约 53% 的两端功率差。实际结果用未取整的曲线点计算。
 
 | 雷达曲线上的位置 | 风速（m/s） | 功率（kW） |
 | --- | ---: | ---: |
@@ -46,7 +46,7 @@ import CaseWalkthrough from './.vitepress/theme/components/CaseWalkthrough.vue'
 | 待估算的窗口 | 6.10 | 约 1,071 |
 | 右侧曲线点 | 约 6.53 | 约 1,287 |
 
-插值使用未取整的曲线点。这个窗口用机舱曲线估算约 1,152 kW，实测约 1,155 kW。
+同一个窗口用机舱曲线估算约 1,152 kW，实测约 1,155 kW。
 
 <CaseWalkthrough example="coverage" />
 
@@ -60,7 +60,7 @@ import CaseWalkthrough from './.vitepress/theme/components/CaseWalkthrough.vue'
 | A1 雷达 | 463 | +445 |
 | WT041 机舱 | 42 | −1 |
 
-在共同的 25 个窗口中，雷达曲线的误差以高估为主，机舱曲线的 MAE 更低，平均偏差也更接近零。因此这一天的 WT041 同期功率估算优先选机舱曲线。 [案例配对 CSV](/data/awaken-a1-wt041-2023-08-24.csv)
+两条曲线在同一批 25 个窗口上比较，机舱曲线的 MAE 为 42 kW，雷达曲线为 463 kW。雷达曲线多数窗口偏高。这一结果支持在本例这一天、这台机组的同期估算中优先采用机舱曲线。 [案例配对 CSV](/data/awaken-a1-wt041-2023-08-24.csv)
 
 ## 曲线应用 {#曲线应用与功率预测}
 

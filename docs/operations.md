@@ -10,7 +10,7 @@ import { withBase } from 'vitepress'
 
 <figure class="tutorial-figure">
   <a :href="withBase('/figures/pitch-concept.svg')" target="_blank" rel="noopener"><img src="/figures/pitch-concept.svg" width="720" height="668" loading="lazy" alt="上层画出三片叶片绕风轮轴转动、风从叶片一侧吹向机舱以及机舱内发电机。下层沿单片叶片长轴看翼型截面，用橙色圆弧标出基准方向到当前方向的夹角。" /></a>
-  <figcaption><strong>风轮旋转与单片叶片变桨</strong> 从迎风面看三片叶片一起旋转，再沿单片叶片长轴看同一翼型截面转过的角度。</figcaption>
+  <figcaption><strong>风轮旋转与单片叶片变桨</strong> 风轮旋转时，叶尖绕轮毂移动。变桨时，从叶尖沿长轴看，看到的是同一片叶片的截面相对于基准方向转过的角度。</figcaption>
 </figure>
 
 ### 四个常用运行量
@@ -53,7 +53,7 @@ import { withBase } from 'vitepress'
 
 <ol class="scatter-reading">
   <li><figure class="tutorial-figure"><a :href="withBase('/figures/wind-generator.png')" target="_blank" rel="noopener"><img src="/figures/aventa-wind-speed.png" width="1020" height="562" loading="lazy" alt="风速–发电机转速图框出了约 750–780 r/min 的水平点群。" /></a><figcaption><strong>先看风速–发电机转速</strong> 约 750–780 r/min 的横向点群标出案例中的高转速运行区间，可据此筛出平台段的记录。</figcaption></figure></li>
-  <li><figure class="tutorial-figure"><a :href="withBase('/figures/generator-power.png')" target="_blank" rel="noopener"><img src="/figures/aventa-speed-power.png" width="1020" height="562" loading="lazy" alt="发电机转速–有功功率图框出了右侧同一转速附近纵向分散的功率点。" /></a><figcaption><strong>再看发电机转速–有功功率</strong> 转速平台对应的功率仍有高低。判断是否接近额定出力，要直接看功率列。</figcaption></figure></li>
+  <li><figure class="tutorial-figure"><a :href="withBase('/figures/generator-power.png')" target="_blank" rel="noopener"><img src="/figures/aventa-speed-power.png" width="1020" height="562" loading="lazy" alt="发电机转速–有功功率图框出了右侧同一转速附近纵向分散的功率点。" /></a><figcaption><strong>再看发电机转速–有功功率</strong> 看右上角约 750–780 r/min 的点带：转速变化范围窄，功率仍约为 5.92–6.78 kW。判断是否接近额定出力，要读取功率。</figcaption></figure></li>
   <li><figure class="tutorial-figure"><a :href="withBase('/figures/wind-pitch.png')" target="_blank" rel="noopener"><img src="/figures/aventa-wind-pitch.png" width="1020" height="562" loading="lazy" alt="风速–桨距角图框出了低风速的多条角度点带，其中约 39 度的一带有棕色记录。" /></a><figcaption><strong>最后对照风速–桨距角</strong> 低风速下出现多条角度带，约 39° 的点带含零功率记录。这些点带提供了按运行状态分组的线索。</figcaption></figure></li>
 </ol>
 

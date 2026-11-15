@@ -4,7 +4,7 @@
 import { withBase } from 'vitepress'
 </script>
 
-变桨筛查有三个尺度：在同风速箱内找偏离，在同一台机组内对照各片叶片，沿时间轴检查反馈是否跟上指令。下表给出各自需要的信号。
+风速分箱回答角度是否偏离历史水平，逐叶片对照回答偏离集中在哪一片，指令与反馈时序回答叶片是否跟上控制指令。
 
 ## 监测数据与证据
 
@@ -26,20 +26,15 @@ import { withBase } from 'vitepress'
 
 ## 风速–桨距角散点图判读
 
-看相近风速下的角度点带，再按时间戳核对状态。连续偏离需回到时间序列判断。
-
-<figure class="tutorial-figure">
-  <a :href="withBase('/figures/pitch-scatter.png')" target="_blank" rel="noopener"><img src="/figures/pitch-scatter.png" width="1110" height="690" loading="lazy" alt="ENGIE 风速–桨距角全范围散点，阴影标出 8 至 9 m/s 箱，橙色菱形标出三个候选窗口。" /></a>
-  <figcaption><strong>ENGIE 风速–桨距角散点</strong> 每点对应一个 10 分钟窗口，角度来自汇总字段 <code>Ba_avg</code>。先用字段齐全且功率为正筛出参考记录，现场分析还要用状态和事件确认工况。</figcaption>
-</figure>
+绘制风速–桨距角散点时，用每个点所在风速箱的参考带判断是否越界。ENGIE 案例使用机组汇总桨距角（`Ba_avg`），每点为一个十分钟窗口。
 
 ### 实测案例：分段参考范围 {#建参考范围并手算一次}
 
-用 ENGIE 的 2 月记录建参考。在 8–9 m/s 箱，442 条样本的中位数为 −0.99°，第 5 至第 95 百分位约为 −0.99° 至 −0.90°。把 3 月同箱记录与这条上界比较，图中标出三个候选窗口。
+先从 ENGIE 的 2 月记录中选字段齐全、功率为正的窗口作案例参考。8–9 m/s 箱的 442 条记录给出中位数 −0.99°，第 5 至第 95 百分位约为 −0.99° 至 −0.90°。用同一条上界对照 3 月的同箱记录。
 
 <figure class="tutorial-figure">
   <a :href="withBase('/figures/pitch-reference-zoom.png')" target="_blank" rel="noopener"><img src="/figures/pitch-reference-zoom.png" width="945" height="600" loading="lazy" alt="放大 8 至 9 m/s 箱的低桨距角范围，三个橙色候选点略高于浅绿色参考带。" /></a>
-  <figcaption><strong>8–9 m/s 风速箱的候选窗口</strong> 用下表核对越界量，再回查前后窗口各自所在的风速箱。</figcaption>
+  <figcaption><strong>8–9 m/s 风速箱的候选窗口</strong> 绿色带是 2 月参考范围，橙色点是 3 月超过上界的候选窗口。纵轴放大了低角度区，便于读出约 0.04–0.05° 的差值。</figcaption>
 </figure>
 
 | 记录时间（UTC） | 风速（m/s） | 桨距角（°） | 高于上界（°） |
@@ -54,12 +49,7 @@ import { withBase } from 'vitepress'
 
 汇总角度会掩盖单片偏离。共同变桨时，可用同一时刻三片反馈角的最大值减最小值来找分歧，再查看哪一片偏开。跨机组对照则用同一坐标比较点带位置，定位哪台机组、哪个风速段值得追查。
 
-<figure class="tutorial-figure">
-  <a :href="withBase('/figures/blade-pitch-comparison.png')" target="_blank" rel="noopener"><img src="/figures/blade-pitch-comparison.png" width="1280" height="976" loading="lazy" alt="左右列分别是 Kelmarsh 1、2 号机组的逐叶片角度，上排显示全范围，下排放大两台机组的 2 至 6 m/s 低角度区域。" /></a>
-  <figcaption><strong>Kelmarsh 逐叶片及跨机组对照</strong> 两台机组均使用 2016 年 7 月的正功率窗口。下排放大 2–6 m/s，便于分辨三片叶片的点带是否分离，以及差异是否集中在一台机组。</figcaption>
-</figure>
-
-[Kelmarsh 逐叶片数据](/data/kelmarsh-blade-pitch.csv)
+在 Kelmarsh 的 2–6 m/s 区间，1、2 号机组三片叶片同窗角度极差的第 95 百分位分别约为 0.045° 和 0.027°。这说明两台机组的大部分记录中，三片角度很接近。若要筛查突然分离的窗口，直接计算角度极差更清楚。 [逐叶片数据](/data/kelmarsh-blade-pitch.csv) · [原散点图](/figures/blade-pitch-comparison.png)
 
 ## 指令跟踪与事件复核 {#变桨监测方法与选用条件}
 
@@ -67,12 +57,7 @@ import { withBase } from 'vitepress'
 
 <figure class="tutorial-figure">
   <a :href="withBase('/figures/pitch-following-patterns.svg')" target="_blank" rel="noopener"><img src="/figures/pitch-following-patterns.svg" width="720" height="360" loading="lazy" alt="左图三片在共同指令升高后同步跟随，右图叶片 1 和 2 跟随，叶片 3 反馈仍停在原位置。" /></a>
-  <figcaption><strong>多片同步变化与单片持续偏离</strong> 指令改变后留出机型规定的响应时间，再判断反馈是否持续偏离。</figcaption>
-</figure>
-
-<figure class="tutorial-figure">
-  <a :href="withBase('/figures/pitch-screening-workflow.svg')" target="_blank" rel="noopener"><img src="/figures/pitch-screening-workflow.svg" width="720" height="293" loading="lazy" alt="从散点标记候选后，依次检查原始时序、叶片指令和反馈、告警与工况，结合事件和检修给出判断。" /></a>
-  <figcaption><strong>变桨异常筛查流程</strong> 流程从候选窗口出发，逐步查清偏离是何时发生的、是否只涉及单片，以及同期控制记录能解释到哪一步。</figcaption>
+  <figcaption><strong>多片同步变化与单片持续偏离</strong> 右图在共同指令升高后，第 3 片反馈仍停在原角度。这种持续不跟随的现象用来定位要查哪片叶片、查哪个时段。</figcaption>
 </figure>
 
 ### 候选事件记录 {#事件复核与检测验证}
