@@ -1,83 +1,163 @@
 # 风电数据分析教程
 
-教程由首页和七个核心章节组成：运行工况、SCADA 数据、变桨监测、风速拟合、功率曲线、风频与 Weibull、风场后评估。
+面向计算机团队的风电数据分析入门教程。用公开运行记录和现场测风案例，说明风机运行工况、SCADA 数据筛选、变桨偏离筛查、两路测风对照、同期功率估算和风场后评估的基本做法。
 
-用 VS Code 编辑 Markdown，用 VitePress 预览和构建。下面以 Windows 为例。
+- **在线教程**：https://luyh-101.github.io/wind-data-analysis-guide/
+- **源码仓库**：https://github.com/luyh-101/wind-data-analysis-guide
+- **当前结构**：首页 + 七个核心章节，使用 VitePress 构建
+- **当前范围**：以公开案例和方法演示为主，不包含项目私有数据、厂商内部参数或完整项目工作说明
 
-## 1. 打开项目
+## 教程内容
 
-1. 在资源管理器中右键点击 `wind-data-analysis-guide.zip`，选择「全部解压缩」。
-2. 在 VS Code 选择「文件 → 打开文件夹」，打开解压后包含 `package.json`、`pnpm-lock.yaml` 和 `docs` 的 `wind-data-analysis-guide` 文件夹。
-3. 在 VS Code 选择「终端 → 新建终端」。运行 `node --version` 检查版本。项目需要 Node.js 22.13 或更高版本。初次安装 Node.js 时保留 npm 和 npx，安装后重新打开 VS Code。 [Node.js 下载](https://nodejs.org/en/download)
+| 顺序 | 章节 | 文件 |
+| --- | --- | --- |
+| 1 | 风机运行工况与变桨故障排查 | `docs/operations.md` |
+| 2 | SCADA 数据质量与工况筛选 | `docs/scada.md` |
+| 3 | 变桨状态监测与异常筛查 | `docs/pitch.md` |
+| 4 | 两路实测风速对照 | `docs/wind-speed.md` |
+| 5 | 两路实测风频比较 | `docs/wind-frequency.md` |
+| 6 | 用风速估算同期功率 | `docs/power.md` |
+| 7 | 风场运行后评估 | `docs/assessment.md` |
 
-## 2. 启动本地预览
+首页是 `docs/index.md`。教程重点是读懂运行记录、把同一时段的量对齐、区分“风速差（m/s）”和“风频差（百分点）”，以及把功率曲线用于同期电量对照。
 
-在项目根目录的 PowerShell 终端运行：
+## 本地预览
+
+### 环境
+
+- Node.js 22.13 或更高版本
+- pnpm 11.25.0（`package.json` 已声明版本；未安装时可用 `start-preview.cmd` 自动调用）
+- Windows 下可直接使用项目根目录的 `start-preview.cmd`
+
+### 直接打开
+
+1. 克隆仓库，或从 GitHub 下载 ZIP 后解压。
+2. 在 VS Code 中打开包含 `package.json`、`pnpm-lock.yaml` 和 `docs` 的目录。
+3. 在项目根目录打开 PowerShell，运行：
 
 ```powershell
 .\start-preview.cmd
 ```
 
-首次运行需要联网安装锁定的依赖。已有 pnpm 时，脚本用 pnpm 安装。未安装 pnpm 时，脚本通过 npx 调用项目指定的版本，无需全局安装。依赖就绪后，脚本直接启动 VitePress。
+脚本会检查 Node.js 版本，安装锁定依赖并启动 VitePress。打开终端中 `Local` 后面的地址，通常是 http://127.0.0.1:5173/ 。结束预览按 `Ctrl+C`。
 
-打开终端中 `Local` 后的网址，通常是 [http://127.0.0.1:5173/](http://127.0.0.1:5173/)。保持终端运行，结束预览时按 `Ctrl+C`。macOS 或 Linux 可在项目目录运行 `pnpm install --frozen-lockfile` 和 `pnpm run dev`。 [VitePress 快速开始](https://vitepress.dev/zh/guide/getting-started)
-
-## 3. 修改正文和图片
-
-在 VS Code 左侧打开对应文件，修改后按 `Ctrl+S` 保存，再回到浏览器检查效果。
-
-| 要修改的内容 | 文件 |
-| --- | --- |
-| 首页 | `docs/index.md` |
-| 风机运行工况与变桨故障 | `docs/operations.md` |
-| SCADA 数据质量与工况筛选 | `docs/scada.md` |
-| 变桨状态监测 | `docs/pitch.md` |
-| 现场测风对照与拟合 | `docs/wind-speed.md` |
-| 功率曲线建模与验证 | `docs/power.md` |
-| 风频与 Weibull 拟合 | `docs/wind-frequency.md` |
-| 风场运行后评估 | `docs/assessment.md` |
-| 案例图和 CSV | `docs/public/figures/`、`docs/public/data/` |
-| 站点标题和导航 | `docs/.vitepress/config.mjs` |
-| 全站字号、行距和正文栏宽 | `docs/.vitepress/theme/style.css` |
-| 时间轴和覆盖图 | `docs/.vitepress/theme/components/` |
-
-审阅时可把浏览器和 VS Code 并排放。按 `Ctrl+P` 输入上表中的文件名快速打开章节，按 `Ctrl+Shift+F` 查找全站用词，修改后按 `Ctrl+S` 回浏览器核对。要统一调整排版，改样式文件开头的 `--tutorial-*` 变量。首页的标题、介绍、按钮和卡片文字在 `docs/index.md` 顶部的 `---` 之间。
-
-新增图表时，把图片放进 `docs/public/figures/`，正文用 `![图表说明](/figures/your-chart.png)` 引用。预览会随文件保存更新。 [VitePress 静态资源说明](https://vitepress.dev/zh/guide/asset-handling)
-
-普通 Markdown 链接和图片使用站内路径。如果手写 HTML 链接用于下载或打开原图，在页面的 `<script setup>` 中从 `vitepress` 导入 `withBase`，并用 `:href="withBase('/figures/your-chart.png')"` 生成地址。
-
-案例图解的说明文字在 `CaseWalkthrough.vue`。图中的实测数值由 `lesson-cases.data.js` 读取站内公开 CSV 并计算。
-
-首页照片由美国鱼类及野生动物管理局拍摄，原图标注为公有领域。站内使用缩小后的 WebP。 [原图与许可](https://commons.wikimedia.org/wiki/File:Wind_turbines_%2854091153454%29.jpg)
-
-## 4. 构建根路径版
-
-内容定稿且已安装依赖后，在 VS Code 新开一个终端运行：
+### 手动启动
 
 ```powershell
-npm.cmd run build
-npm.cmd run preview
+pnpm install --frozen-lockfile
+pnpm run dev
 ```
 
-构建完成后，打开预览命令打印的地址，检查首页、章节跳转、图片和 CSV 下载。这里预览的是本次构建生成的版本。 [VitePress 构建与部署](https://vitepress.dev/zh/guide/deploy)
+macOS 或 Linux 使用同样的 pnpm 命令即可。
 
-发布文件在 `docs/.vitepress/dist/`。上传时选这个文件夹，或者把它里面的文件和子文件夹一起压缩，确保 ZIP 打开后的第一层就有 `index.html`。随交付提供的 `wind-data-analysis-site.zip` 是已构建的版本。在上码发布或更新原项目后，先用电脑无痕窗口和手机流量核对正式网址，再发给成员。 [上码发布与更新指南](https://www.upma.cn/docs)
+## 构建与部署
 
-## 5. GitHub Pages 自动部署
+### 根路径构建
 
-在 GitHub 仓库中，打开 **Settings → Pages**，将 **Build and deployment → Source** 设为 **GitHub Actions**。推送到 `main` 后，工作流按 `package.json` 指定的 pnpm 版本和锁文件安装依赖，构建并部署到 [GitHub Pages 站点](https://luyh-101.github.io/wind-data-analysis-guide/)。如果空仓库暂时无法选择来源，首次推送后再设置，并在 **Actions** 中运行工作流。 [GitHub Pages 工作流说明](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
+```powershell
+pnpm run build
+pnpm run preview
+```
 
-要在本机验证同样的子路径，在新开的 PowerShell 终端运行以下命令。
+产物在 `docs/.vitepress/dist/`。
+
+### GitHub Pages 子路径构建
 
 ```powershell
 $env:VITEPRESS_DEPLOY_TARGET = 'github-pages'
-npm.cmd run build
-npm.cmd run preview
+pnpm run build
+pnpm run preview
 ```
 
-用预览端口访问 `/wind-data-analysis-guide/`，例如 [http://127.0.0.1:4173/wind-data-analysis-guide/](http://127.0.0.1:4173/wind-data-analysis-guide/)。子路径版产物在 `docs/.vitepress/dist-github-pages/`。结束预览后关闭这个终端，或运行 `Remove-Item Env:VITEPRESS_DEPLOY_TARGET`，使当前终端恢复根路径构建。
+启动后访问 `http://127.0.0.1:4173/wind-data-analysis-guide/`。子路径版产物在 `docs/.vitepress/dist-github-pages/`。
 
-## 6. 分享源码
+### 自动部署
 
-源码 ZIP 包含根目录的 README、项目配置、锁文件、启动脚本和部署工作流，以及 `docs` 中的章节、主题配置和公开资源。依赖、缓存和两种构建产物按 `.gitignore` 排除。提交前核对文件清单，`docs/public/` 中的文件会随网站一起公开。解压后在 VS Code 打开包含本 README 和 `package.json` 的目录。
+仓库通过 `.github/workflows/deploy-pages.yml` 部署到 GitHub Pages：
+
+- 推送到 `main` 后自动构建和部署；
+- 使用 pnpm 锁文件安装依赖；
+- Pages 的 Source 设为 **GitHub Actions**；
+- 正式地址：https://luyh-101.github.io/wind-data-analysis-guide/
+
+## 目录说明
+
+```text
+docs/
+  index.md                 首页
+  operations.md            运行工况
+  scada.md                 SCADA 数据质量与筛选
+  pitch.md                 变桨状态监测
+  wind-speed.md            两路实测风速对照
+  wind-frequency.md        两路实测风频比较
+  power.md                 同期功率估算
+  assessment.md            风场运行后评估
+  .vitepress/              配置、主题和组件
+  public/data/             公开案例数据和复算脚本
+  public/figures/          教程图表
+scripts/
+  plot-tutorial-figures.py 生成实测与示意图表
+  draw-tutorial-diagrams.py 生成流程示意图
+.github/workflows/         GitHub Pages 部署
+```
+
+## 修改正文和图表
+
+普通正文直接编辑 `docs/*.md`，保存后浏览器会刷新预览。
+
+页面中的读图组件是 `docs/.vitepress/theme/components/TeachingFigure.vue`。它负责统一图片、图注、点击查看原图和 `base` 路径，示例：
+
+```md
+<TeachingFigure
+  src="/figures/example.png"
+  :width="1020"
+  :height="580"
+  title="图题"
+  alt="图片替代说明"
+>
+  图注正文。
+</TeachingFigure>
+```
+
+新增图片放入 `docs/public/figures/`，用 `/figures/文件名` 引用。手写 HTML 的下载或原图链接时，需要从 `vitepress` 导入 `withBase`，并用 `:href="withBase('/figures/文件名')"`，否则 GitHub Pages 子路径下会失效。
+
+实测图表由 `scripts/plot-tutorial-figures.py` 生成，流程示意图由 `scripts/draw-tutorial-diagrams.py` 生成。运行前安装 Python 依赖：
+
+```powershell
+python -m pip install pandas matplotlib pyarrow
+python scripts/plot-tutorial-figures.py
+python scripts/draw-tutorial-diagrams.py
+```
+
+图表生成脚本读取 `docs/public/data/` 中的公开节选；修改数据或图形后应重新生成图片并检查站点。图中数值只对应案例时段，不应直接当成其他机组或长期项目的结论。
+
+## 案例数据与来源
+
+`docs/public/data/` 保留四组公开案例的节选、说明和复算脚本：
+
+- [案例数据说明](docs/public/data/case-data-notes.txt)
+- Aventa AV-7：`aventa-linked-scatter.csv`、`aventa-case-input.parquet`
+- ENGIE La Haute Borne：`engie-r80711-2014-02-03.csv`、`engie-case-input.zip`
+- Kelmarsh：`kelmarsh-blade-pitch.csv`
+- AWAKEN King Plains：`awaken-a1-wt041-2023-08-24.csv`、`awaken-a1-lidar-80m-10min.csv`、`awaken-wt041-scada-1min.csv`
+- 复算脚本：`reproduce-scada-cases.py`
+
+主要来源和许可：
+
+- **Aventa AV-7**：Barber、Hammer、Marykovskiy，Zenodo，CC BY 4.0，https://doi.org/10.5281/zenodo.16738078
+- **ENGIE La Haute Borne**：ENGIE Renewables / OpenOA 示例归档，Etalab Open Licence 2.0
+- **Kelmarsh**：Charlie Plumley（Cubico），Zenodo，CC BY 4.0，https://doi.org/10.5281/zenodo.8252025
+- **AWAKEN King Plains**：Nicola Bodini，Zenodo，CC BY 4.0，https://doi.org/10.5281/zenodo.15623845
+
+完整的字段映射、筛选条件、时段和许可说明见 [案例数据说明](docs/public/data/case-data-notes.txt)。网站上的实测图使用这些节选绘制，转载或再利用时请保留数据来源和许可署名。
+
+首页照片由美国鱼类及野生动物管理局拍摄，原图标注为公有领域，站内使用缩小后的 WebP：https://commons.wikimedia.org/wiki/File:Wind_turbines_%2854091153454%29.jpg
+
+## 维护约定
+
+- 页面标题、侧边栏和导航以当前七个章节为准；不要重新引入已删除的专题页。
+- 章节顺序为：运行工况 → SCADA → 变桨 → 两路风速 → 两路风频 → 同期功率 → 风场后评估。
+- 新增实测数字时，要同时写出数据来源、时间窗口、样本数和筛选条件。
+- 合成示意图必须在可见标题或图注中标注“示意”，不能与实测图混用。
+- 修改图表后重新运行构建，检查图片、站内锚点和 GitHub Pages 子路径。
+- `CaseWalkthrough.vue` 和 `lesson-cases.data.js` 是旧版交互组件的保留文件，当前页面不再引用；新增页面请使用 `TeachingFigure.vue`。
