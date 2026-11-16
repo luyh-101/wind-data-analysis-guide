@@ -13,7 +13,6 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '运行工况', link: '/operations' },
-      { text: '方法与案例', link: '/research' },
     ],
     sidebar: [
       { text: '运行工况与变桨故障', link: '/operations' },
@@ -23,8 +22,6 @@ export default defineConfig({
       { text: '功率曲线建模与验证', link: '/power' },
       { text: '风频与 Weibull 拟合', link: '/wind-frequency' },
       { text: '风场运行后评估', link: '/assessment' },
-      { text: '运行分析专题', link: '/practice' },
-      { text: '方法选择与公开案例', link: '/research' },
     ],
     outline: { label: '本页目录', level: [2, 3] },
     docFooter: { prev: '上一篇', next: '下一篇' },

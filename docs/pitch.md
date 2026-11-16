@@ -32,14 +32,16 @@ import { withBase } from 'vitepress'
 
 先从 ENGIE 的 2 月记录中选字段齐全、功率为正的窗口作案例参考。8–9 m/s 箱的 442 条记录给出中位数 −0.99°，第 5 至第 95 百分位约为 −0.99° 至 −0.90°。P95 是经验分位数：即使样本都来自正常参考期，也会有约 5% 高于上界（2 月为 22/442=5.0%）。因此“高于 P95”只表示进入候选，不是故障率；真实误报率还要用带标签的故障和正常数据评估。
 
-按同一规则，3 月同箱有 7 个窗口高于 −0.90°（7/278=2.5%，低于 2 月的 5%）。下图只标注偏离最大的 3 个，下表列出全部 7 个。
+按同一规则，3 月同箱有 7 个窗口高于 −0.90°（7/278=2.5%，低于 2 月的 5%）。下图只标注偏离最大的 3 个，完整 7 个见下方可展开记录。
 
 <figure class="tutorial-figure">
   <a :href="withBase('/figures/pitch-reference-zoom.png')" target="_blank" rel="noopener"><img src="/figures/pitch-reference-zoom.png" width="945" height="600" loading="lazy" alt="放大 8 至 9 m/s 箱的低桨距角范围，图中标注三个偏离最大的橙色候选点，它们略高于浅绿色参考带。" /></a>
-  <figcaption><strong>8–9 m/s 风速箱的候选窗口</strong> 绿色带是 2 月参考范围。图中标注 3 个偏离最大的候选；按同一规则，3 月共有 7 个窗口高于上界，全部列在下表。纵轴放大了低角度区，最大偏离约 0.05°。</figcaption>
+  <figcaption><strong>8–9 m/s 风速箱的候选窗口</strong> 绿色带是 2 月参考范围。图中标注 3 个偏离最大的候选；按同一规则，3 月共有 7 个窗口高于上界，完整记录见下方。纵轴放大了低角度区，最大偏离约 0.05°。</figcaption>
 </figure>
 
-**3 月 8–9 m/s 箱中高于 2 月 P95 的全部窗口**
+这 7 个窗口仅高出上界 0.01–0.05°。在没有该机型角度测量精度、控制死区和已知故障标签的情况下，不能判断这样的差异是否构成真实故障。例如 3 月 21 日 11:30 相邻两窗的风速为 10.50 和 11.12 m/s，桨距角分别为 −0.21° 和 0.54°，说明它处在快速变化过程中；这时更应结合持续时间和逐叶片、指令/反馈证据复核，而不是只凭单窗越界定性。
+
+::: details 查看 7 个候选窗口的完整记录
 
 | 记录时间（UTC） | 风速（m/s） | 桨距角（°） | 高于上界（°） |
 | --- | ---: | ---: | ---: |
@@ -51,13 +53,15 @@ import { withBase } from 'vitepress'
 | 2014-03-22 10:00 | 8.52 | −0.86 | 0.04 |
 | 2014-03-22 12:40 | 8.98 | −0.88 | 0.02 |
 
-这 7 个窗口仅高出上界 0.01–0.05°。在没有该机型角度测量精度、控制死区和已知故障标签的情况下，不能判断这样的差异是否构成真实故障。例如 3 月 21 日 11:30 相邻两窗的风速为 10.50 和 11.12 m/s，桨距角分别为 −0.21° 和 0.54°，说明它处在快速变化过程中；这时更应结合持续时间和逐叶片、指令/反馈证据复核，而不是只凭单窗越界定性。 [ENGIE 案例 CSV](/data/engie-r80711-2014-02-03.csv)
+:::
+
+案例数据：<a :href="withBase('/data/engie-r80711-2014-02-03.csv')" download>ENGIE CSV</a> · <a :href="withBase('/data/case-data-notes.txt')" download>数据说明</a> · <a :href="withBase('/data/reproduce-scada-cases.py')" download>复算脚本</a> + <a :href="withBase('/data/engie-case-input.zip')" download>ENGIE ZIP</a>。来源：ENGIE Renewables / [OpenOA 示例归档](https://github.com/NatLabRockies/OpenOA#example-notebooks-and-data)，2014-02–03，Etalab Open Licence 2.0。
 
 ## 逐叶片和跨机组对照
 
-汇总角度会掩盖单片偏离。共同变桨时，可用同一时刻三片反馈角的最大值减最小值来找分歧，再查看哪一片偏开。跨机组对照则用同一坐标比较点带位置，定位哪台机组、哪个风速段值得追查。
+汇总角度会掩盖单片偏离。共同变桨时，可用同一时刻三片反馈角的最大值减最小值来找分歧，再查看哪一片偏开。跨机组对照则用同一坐标比较点带位置，定位哪台机组、哪个风速段值得追查。Kelmarsh 的逐叶片记录可直接用来练习这一计算。
 
-在 Kelmarsh 的 2–6 m/s 区间，1、2 号机组三片叶片同窗角度极差的第 95 百分位分别约为 0.045° 和 0.027°。这说明两台机组的大部分记录中，三片角度很接近。若要筛查突然分离的窗口，直接计算角度极差更清楚。 [逐叶片数据](/data/kelmarsh-blade-pitch.csv) · [原散点图](/figures/blade-pitch-comparison.png)
+案例数据：<a :href="withBase('/data/kelmarsh-blade-pitch.csv')" download>逐叶片数据</a> · <a :href="withBase('/figures/blade-pitch-comparison.png')" target="_blank" rel="noopener">原散点图</a> · <a :href="withBase('/data/case-data-notes.txt')" download>数据说明</a>。来源：Plumley（Cubico），[Zenodo DOI](https://doi.org/10.5281/zenodo.8252025)，2016-07，CC BY 4.0。
 
 ## 指令跟踪与事件复核 {#变桨监测方法与选用条件}
 

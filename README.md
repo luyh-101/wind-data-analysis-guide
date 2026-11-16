@@ -1,5 +1,7 @@
 # 风电数据分析教程
 
+教程由首页和七个核心章节组成：运行工况、SCADA 数据、变桨监测、风速拟合、功率曲线、风频与 Weibull、风场后评估。
+
 用 VS Code 编辑 Markdown，用 VitePress 预览和构建。下面以 Windows 为例。
 
 ## 1. 打开项目
@@ -34,12 +36,10 @@
 | 功率曲线建模与验证 | `docs/power.md` |
 | 风频与 Weibull 拟合 | `docs/wind-frequency.md` |
 | 风场运行后评估 | `docs/assessment.md` |
-| 运行分析专题 | `docs/practice.md` |
-| 方法选择与公开案例 | `docs/research.md` |
 | 案例图和 CSV | `docs/public/figures/`、`docs/public/data/` |
 | 站点标题和导航 | `docs/.vitepress/config.mjs` |
 | 全站字号、行距和正文栏宽 | `docs/.vitepress/theme/style.css` |
-| 时间轴、覆盖图和实测对照 | `docs/.vitepress/theme/components/` |
+| 时间轴和覆盖图 | `docs/.vitepress/theme/components/` |
 
 审阅时可把浏览器和 VS Code 并排放。按 `Ctrl+P` 输入上表中的文件名快速打开章节，按 `Ctrl+Shift+F` 查找全站用词，修改后按 `Ctrl+S` 回浏览器核对。要统一调整排版，改样式文件开头的 `--tutorial-*` 变量。首页的标题、介绍、按钮和卡片文字在 `docs/index.md` 顶部的 `---` 之间。
 

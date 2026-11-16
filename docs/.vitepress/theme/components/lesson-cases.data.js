@@ -74,17 +74,9 @@ export default {
       const n = estimate(nacelleCurve, num(row.nacelle_ms)) !== null
       coverage[l ? (n ? 'both' : 'lidar') : (n ? 'nacelle' : 'neither')]++
     }
-    const comparison = ['lidar_ms', 'nacelle_ms'].map(source => {
-      const summarize = rows => {
-        const values = rows.filter(r => Math.floor(num(r[source])) === 6).map(r => num(r.power_kw))
-        return { count: values.length, power: mean(values) }
-      }
-      return { source, before: summarize(training), after: summarize(heldOut) }
-    })
     return {
       pairing: { minutes, nacelle: mean(firstMinutes.map(r => num(r.nacelle_ms))), lidar: num(lidarRecord.lidar_ms) },
-      coverage: { ...coverage, total: heldOut.length },
-      comparison
+      coverage: { ...coverage, total: heldOut.length }
     }
   }
 }

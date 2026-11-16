@@ -303,7 +303,7 @@
 }
 
 .VPHome .vp-doc .home-reading {
-  max-width: var(--tutorial-reading-width);
+  max-width: 64rem;
   margin: 40px auto 0;
   padding: 0 24px;
 }

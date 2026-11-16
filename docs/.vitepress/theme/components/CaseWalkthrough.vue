@@ -10,9 +10,6 @@ const coverageGroups = [
   { key: 'lidar', label: '仅雷达曲线' },
   { key: 'neither', label: '两条都不能估算' }
 ]
-const sourceNames = { lidar_ms: 'A1 雷达', nacelle_ms: 'WT041 机舱' }
-const comparisonScale = Math.max(1500, ...data.comparison.flatMap(item => [item.before.power, item.after.power]).map(value => Math.ceil(value / 100) * 100))
-const fmtKw = value => new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 1 }).format(value).replace('-', '−')
 </script>
 
 <template>
@@ -49,21 +46,5 @@ const fmtKw = value => new Intl.NumberFormat('zh-CN', { maximumFractionDigits: 1
       </div>
     </dl>
     <p class="lesson-result">两条曲线都能估算的窗口约占 <strong>{{ fmt(data.coverage.both / data.coverage.total * 100, 0) }}%</strong>。</p>
-  </figure>
-
-  <figure v-else-if="example === 'comparison'" class="lesson-figure" aria-labelledby="comparison-caption">
-    <figcaption id="comparison-caption" class="lesson-title">按雷达和机舱风速分箱时的功率对照</figcaption>
-    <p class="lesson-note">WT041，6–7 m/s 箱，16:00 UTC 前后对照。条形表示平均功率，两组用同一标尺（0–{{ fmtKw(comparisonScale) }} kW）。</p>
-    <div class="lesson-grid lesson-comparison">
-      <div v-for="group in data.comparison" :key="group.source">
-        <strong>{{ sourceNames[group.source] }}分箱</strong>
-        <div v-for="(label, key) in { before: '16:00 前', after: '16:00 起' }" :key="key" class="lesson-bar-row">
-          <div><span>{{ label }} · {{ group[key].count }} 个窗口</span><strong>{{ fmtKw(group[key].power) }} kW</strong></div>
-          <div class="lesson-bar-track" aria-hidden="true"><span :style="{ width: group[key].power / comparisonScale * 100 + '%' }"></span></div>
-        </div>
-        <strong>后段减前段：{{ fmtKw(group.after.power - group.before.power) }} kW</strong>
-      </div>
-    </div>
-    <p class="lesson-result">按雷达风速分箱时，前后两组的平均功率差较大。改用机舱风速后，入选窗口随之改变。比较同机组前后出力时，应固定分箱用的风速来源。</p>
   </figure>
 </template>

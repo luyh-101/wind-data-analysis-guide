@@ -12,9 +12,6 @@ hero:
     - theme: brand
       text: 风机运行工况
       link: /operations
-    - theme: alt
-      text: 公开实测案例
-      link: /research#公开案例与复算资料
 
 features:
   - title: 运行监测与变桨异常筛查
@@ -54,11 +51,6 @@ features:
   <li><strong>从风频估算电量</strong>
 
 [风频与 Weibull](/wind-frequency) · [风场后评估](/assessment)
-
-  </li>
-  <li><strong>按任务查找方法</strong>
-
-[运行专题](/practice) · [公开案例](/research)
 
   </li>
 </ol>
