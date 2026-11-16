@@ -47,7 +47,7 @@ import { withBase } from 'vitepress'
 
 相似记录在散点图上排成的窄条叫**点带**。同一风速附近出现多个高度不同的桨距角点带，称为**分层**。
 
-Aventa AV-7 是约 6 kW 的小型研究机组，图中绿色为正功率，棕色为零或负功率。点击图可查看原图。
+Aventa AV-7 是约 6 kW 的小型研究机组，图中绿色为正功率，棕色为零或负功率。点击图可查看原图。它用于概念演示；MW 级机组的具体控制和功率水平需用本机数据确定。
 
 <figure class="tutorial-figure">
   <a :href="withBase('/figures/aventa-wind-pitch.png')" target="_blank" rel="noopener"><img src="/figures/aventa-wind-pitch.png" width="1020" height="562" loading="lazy" alt="风速–桨距角图框出了低风速的多条角度点带，其中约 39 度的一带有棕色记录。" /></a>
