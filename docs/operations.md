@@ -2,6 +2,7 @@
 
 <script setup>
 import { withBase } from 'vitepress'
+import TeachingFigure from './.vitepress/theme/components/TeachingFigure.vue'
 </script>
 
 ## 风机怎样把风转化为电能
@@ -43,6 +44,18 @@ import { withBase } from 'vitepress'
 
 上游机组形成的**尾流**通常会降低下游的平均风速、增强湍流。尾流、地形和覆冰都可能影响出力，可以结合风向和运行事件复核。[SCADA 数据质量与工况筛选](/scada)
 
-## 风速–桨距角散点图 {#运行参数图谱}
+## 用三张散点图认识运行工况 {#运行参数图谱}
 
-把同一条记录的风速和实测桨距角画成一个点，横轴为风速，纵轴为角度。先选同一机组和叶片，把正常发电、启停和限功率分开标记。相近风速下如果出现几条角度点带，就结合转速和工况查看各条带从哪里来，再在可比条件下找偏离。 [怎样建立正常参考](/pitch)
+下面三张图用的是同一台小型机组的公开运行记录。每个点代表一个时段，三张图各从该时段选两个运行量作横纵坐标。绿色是正功率，棕色是零或负功率。先看点群的形状，再从时间戳回查同一条记录。
+
+<TeachingFigure src="/figures/aventa-wind-speed.png" :width="1020" :height="562" title="先用风速和转速找平台" alt="低风速段的转速点群向上延伸，框内的高转速点群随风速增加仍接近水平。">
+  看右上方框内的横向点群。风速继续升高，转速仍集中在较窄的范围，这就是转速平台。图中的转速数值只适用于该机组。
+</TeachingFigure>
+
+<TeachingFigure src="/figures/aventa-speed-power.png" :width="1020" :height="562" title="再看平台上的功率" alt="右上角框内的功率点在相近发电机转速下仍分布在不同高度。">
+  把第一张图中的平台转速移到这张图的横轴。右上框内的点在相近转速下仍有高低，判断出力时要直接读纵轴的功率。
+</TeachingFigure>
+
+<TeachingFigure src="/figures/aventa-wind-pitch.png" :width="1020" :height="562" title="最后看同一风速下的桨距角" alt="左侧低风速区出现多条不同高度的窄点带，其中较高的棕色点带对应零或负功率记录。">
+  看左侧，同一风速附近的桨距角排成几条窄带，这就是分层。上面的棕色点带对应零或负功率，先把这些时段与正常发电分开，再到<a :href="withBase('/pitch.html')">变桨章节</a>学习怎样比较同工况下的角度。
+</TeachingFigure>

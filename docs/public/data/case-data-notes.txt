@@ -7,6 +7,7 @@ Sarah Barber、Florian Hammer、Yuriy Marykovskiy，Aventa AV-7 (6kW) IET-OST Re
 https://doi.org/10.5281/zenodo.16738078
 取 2025 年 6 月 4–10 日（UTC）的记录，检查数值，按分钟求均值，每窗至少 55 条有效记录，共得到 10,032 个窗口。
 datetime → time_utc；wind_speed → wind_ms；generator_speed → generator_rpm；power_output → power_kw；blade_pitch_deg → pitch_deg。
+运行工况章节的三张带框散点图由该节选绘制（aventa-wind-speed.png、aventa-speed-power.png、aventa-wind-pitch.png）。
 
 ENGIE La Haute Borne
 ENGIE Renewables 发布，取自 OpenOA 的 2014–2015 年示例归档，Etalab Open Licence 2.0。
@@ -24,6 +25,7 @@ Nicola Bodini，AWAKEN wind farm wake benchmark inputs，CC BY 4.0。
 https://doi.org/10.5281/zenodo.15623845
 提取 WT041 的一分钟记录和 A1 地基雷达 80 m 层的测风记录，按十分钟窗口配对。
 nacelle_ms 是发布数据中已修正到轮毂高度的风速，lidar_ms 是雷达测层风速。valid_minute 和 generating_minute 分别为有效分钟数和通过发电筛选的分钟数，eligible 标记合格的配对窗口。
+测风及功率章节的实测读图素材由该配对节选绘制（wind-difference-reading.png、wind-pairs.png、paired-wind-frequency.png、power-curve-reading.png、power-validation.png）。
 
 许可
 CC BY 4.0：https://creativecommons.org/licenses/by/4.0/

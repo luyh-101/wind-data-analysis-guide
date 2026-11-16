@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 340" font-family="Microsoft YaHei, PingFang SC, Noto Sans CJK SC, sans-serif" stroke-linecap="round" stroke-linejoin="round">
+<title>按实际覆盖时段配对（示意）</title>
+<defs><marker id="arrow" viewBox="0 0 10 10" markerWidth="7" markerHeight="7" refX="9" refY="5" orient="auto-start-reverse"><path d="M1 1L9 5L1 9" fill="none" stroke="#006c60" stroke-width="1.5"/></marker></defs>
+<rect x="1" y="1" width="718" height="338" rx="10" fill="#f7faf9" stroke="#cbdad9"/>
+<text x="28" y="43" fill="#19343b" font-size="27" font-weight="700" text-anchor="start">两种时间标签，同一段十分钟</text>
+<text x="29" y="89" fill="#19343b" font-size="21" font-weight="650" text-anchor="start">SCADA 原始读数及汇总窗口</text>
+<rect x="94" y="104" width="510" height="74" rx="8" fill="#e9f3ef" stroke="#cbdad9"/>
+<path d="M605 102V272" fill="none" stroke="#44616a" stroke-width="1.5" stroke-dasharray="5 5"/>
+<path d="M95 148H675" fill="none" stroke="#44616a" stroke-width="1.8" />
+<circle cx="95" cy="148" r="4.5" fill="#006c60"/>
+<circle cx="146" cy="148" r="4.5" fill="#006c60"/>
+<circle cx="197" cy="148" r="4.5" fill="#006c60"/>
+<circle cx="248" cy="148" r="4.5" fill="#006c60"/>
+<circle cx="299" cy="148" r="4.5" fill="#006c60"/>
+<circle cx="350" cy="148" r="4.5" fill="#006c60"/>
+<circle cx="401" cy="148" r="4.5" fill="#006c60"/>
+<circle cx="452" cy="148" r="4.5" fill="#006c60"/>
+<circle cx="503" cy="148" r="4.5" fill="#006c60"/>
+<circle cx="554" cy="148" r="4.5" fill="#006c60"/>
+<circle cx="605" cy="148" r="5.5" fill="white" stroke="#44616a" stroke-width="2"/>
+<circle cx="656" cy="148" r="4.5" fill="#7d969b"/>
+<text x="95" y="204" fill="#006c60" font-size="19" font-weight="650" text-anchor="start">汇总记作 00:00</text>
+<text x="608" y="204" fill="#44616a" font-size="18" font-weight="500" text-anchor="start">下一窗</text>
+<text x="29" y="245" fill="#19343b" font-size="21" font-weight="650" text-anchor="start">雷达均值覆盖的时段</text>
+<path d="M95 269H605" fill="none" stroke="#385b81" stroke-width="5" />
+<circle cx="350" cy="269" r="7" fill="white" stroke="#385b81" stroke-width="3"/>
+<text x="95" y="307" fill="#44616a" font-size="19" font-weight="500" text-anchor="middle">00:00</text>
+<text x="350" y="307" fill="#385b81" font-size="19" font-weight="650" text-anchor="middle">记作 00:05</text>
+<text x="605" y="307" fill="#44616a" font-size="19" font-weight="500" text-anchor="middle">00:10</text>
+</svg>

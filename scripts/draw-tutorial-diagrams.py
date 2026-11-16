@@ -232,6 +232,31 @@ def assessment_workflow():
     ])
 
 
+def scada_time_window():
+    parts = [
+        label(28, 43, "两种时间标签，同一段十分钟", 27, INK, 700),
+        label(29, 89, "SCADA 原始读数及汇总窗口", 21, INK, 650),
+        rect(94, 104, 510, 74, "#e9f3ef", LINE, 8),
+        path("M605 102V272", MUTED, 1.5, 'stroke-dasharray="5 5"'),
+        path("M95 148H675", MUTED, 1.8),
+    ]
+    for x in range(95, 605, 51):
+        parts.append(f'<circle cx="{x}" cy="148" r="4.5" fill="{TEAL}"/>')
+    parts.extend([
+        '<circle cx="605" cy="148" r="5.5" fill="white" stroke="#44616a" stroke-width="2"/>',
+        '<circle cx="656" cy="148" r="4.5" fill="#7d969b"/>',
+        label(95, 204, "汇总记作 00:00", 19, TEAL, 650),
+        label(608, 204, "下一窗", 18, MUTED),
+        label(29, 245, "雷达均值覆盖的时段", 21, INK, 650),
+        path("M95 269H605", BLUE, 5),
+        '<circle cx="350" cy="269" r="7" fill="white" stroke="#385b81" stroke-width="3"/>',
+        label(95, 307, "00:00", 19, MUTED, 500, "middle"),
+        label(350, 307, "记作 00:05", 19, BLUE, 650, "middle"),
+        label(605, 307, "00:10", 19, MUTED, 500, "middle"),
+    ])
+    write("scada-time-window", "按实际覆盖时段配对（示意）", 340, parts)
+
+
 if __name__ == "__main__":
     OUTPUT.mkdir(parents=True, exist_ok=True)
     pitch_concept()
@@ -257,3 +282,4 @@ if __name__ == "__main__":
     ])
     pitch_screening()
     assessment_workflow()
+    scada_time_window()

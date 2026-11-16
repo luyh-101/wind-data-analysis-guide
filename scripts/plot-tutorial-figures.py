@@ -9,6 +9,7 @@ import pandas as pd
 
 matplotlib.use("Agg")
 from matplotlib import font_manager, pyplot as plt
+from matplotlib.dates import DateFormatter, HourLocator
 from matplotlib.patches import Rectangle
 from matplotlib.ticker import MaxNLocator, PercentFormatter
 
@@ -256,6 +257,122 @@ def synchronized_signals(aventa):
     axes[-1].set_xticks([0, 4, 8, 12, 14], ["05:23", "05:27", "05:31", "05:35", "05:37"])
     save(fig, "aventa-synchronized-signals")
 
+def pitch_reference_reading():
+    fig, ax = panel(6.8, 3.87)
+    ranges = [(5, 3.2, 4.2, 5.5), (6, 3.7, 4.8, 6.1), (7, 4.3, 5.4, 6.6)]
+    ax.fill_between([], [], [], color=HIGHLIGHT, label="正常参考范围")
+    ax.plot([], [], color=TEAL, linewidth=2.1, label="正常角度中位数")
+    for start, low, middle, high in ranges:
+        ax.add_patch(Rectangle((start, low), 1, high - low, facecolor=HIGHLIGHT,
+                               edgecolor=TEAL, linewidth=1))
+        ax.hlines(middle, start, start + 1, color=TEAL, linewidth=2.1)
+    ax.scatter(5.62, 4.5, c=BLUE, marker="o", s=52, zorder=3)
+    ax.scatter(6.62, 7.0, c=AMBER, marker="D", s=58, zorder=3)
+    ax.annotate("在范围内", (5.62, 4.5), xytext=(5.27, 2.8),
+                arrowprops={"arrowstyle": "-", "color": BLUE}, color=BLUE)
+    ax.annotate("候选偏离", (6.62, 7.0), xytext=(6.89, 7.5),
+                arrowprops={"arrowstyle": "-", "color": AMBER}, color=AMBER)
+    ax.set(xlim=(4.9, 8.1), ylim=(2.2, 9.0), xticks=[5, 6, 7, 8])
+    axis(ax, "风速（m/s）", "桨距角（°）", "同一片叶片的正常参考与待查记录（示意）")
+    ax.legend(loc="upper left")
+    save(fig, "pitch-reference-reading")
+
+
+def pitch_motion_reading():
+    fig, ax = panel(6.8, 3.87)
+    time = np.arange(0, 36, 5)
+    ax.axvspan(20, 35, color="#f8efe9")
+    ax.plot(time, [3, 4, 7, 8, 8, 10, 12, 14], color=TEAL, linewidth=2.4,
+            marker="o", markersize=4, label="叶片 1")
+    ax.plot(time, [2, 3, 6, 7, 7, 9, 11, 13], color=BLUE, linewidth=2.2,
+            linestyle="--", marker="s", markersize=4, label="叶片 2")
+    ax.plot(time, [1, 2, 5, 6, 6, 7, 7, 8], color=AMBER, linewidth=2.2,
+            linestyle="-.", marker="D", markersize=4, label="叶片 3")
+    ax.text(8, 11.7, "三片一起变化", ha="center", color=MUTED)
+    ax.text(28, 4.3, "第 3 片变化较小", ha="center", color=AMBER)
+    ax.set(xlim=(0, 35.5), ylim=(0, 17.5), xticks=time)
+    axis(ax, "经过时间（s）", "桨距角（°）", "逐叶片实测角度时序画法（示意）")
+    ax.legend(loc="upper left", ncols=3, columnspacing=1.2)
+    save(fig, "pitch-motion-reading")
+
+
+def wind_difference_reading(paired):
+    paired = paired.sort_values("window_start_utc")
+    times = paired.window_start_utc
+    difference = paired.nacelle_ms - paired.lidar_ms
+    fig, (wind_ax, diff_ax) = plt.subplots(
+        2, 1, figsize=(6.8, 5), sharex=True, layout="constrained",
+    )
+    wind_ax.plot(times, paired.nacelle_ms, color=BLUE, linewidth=1.7, label="机舱")
+    wind_ax.plot(times, paired.lidar_ms, color=TEAL, linewidth=1.7,
+                 linestyle="--", label="雷达")
+    axis(wind_ax, "", "风速（m/s）", "同一时段，两路风速怎样变化")
+    wind_ax.legend(loc="upper left", ncols=2)
+    diff_ax.axhline(0, color=MUTED, linestyle="--")
+    diff_ax.plot(times, difference, color=AMBER, linewidth=1.6)
+    axis(diff_ax, "时间（UTC）", "机舱 − 雷达（m/s）")
+    diff_ax.xaxis.set_major_locator(HourLocator(byhour=range(0, 24, 4)))
+    diff_ax.xaxis.set_major_formatter(DateFormatter("%H:%M"))
+    diff_ax.set_xlim(times.min(), times.max())
+    save(fig, "wind-difference-reading")
+
+
+def paired_wind_frequency(paired):
+    paired = paired[["nacelle_ms", "lidar_ms"]].dropna()
+    start = int(np.floor(paired.min().min()))
+    stop = int(np.floor(paired.max().max())) + 1
+    bins = np.arange(start, stop + 1)
+    positions = bins[:-1]
+    fig, ax = panel(6.8, 3.87)
+    ax.axvspan(5.55, 6.45, facecolor=HIGHLIGHT, edgecolor=TEAL,
+               linewidth=1.2, linestyle="--")
+    ax.bar(positions - .19, np.histogram(paired.nacelle_ms, bins)[0] / len(paired),
+           width=.35, color=BLUE, label="机舱")
+    ax.bar(positions + .19, np.histogram(paired.lidar_ms, bins)[0] / len(paired),
+           width=.35, color=TEAL, label="雷达")
+    ax.set_xticks(positions, [f"{value}–{value + 1}" for value in positions])
+    ax.yaxis.set_major_formatter(PercentFormatter(xmax=1, decimals=0))
+    axis(ax, "风速区间（m/s）", "共同观测时段占比", "两路风速在各区间出现的比例")
+    ax.legend(loc="upper left", ncols=2)
+    save(fig, "paired-wind-frequency")
+
+
+def power_curve_reading(train):
+    fig, ax = panel(6.8, 3.87)
+    ax.scatter(train.nacelle_ms, train.power_kw, c=BLUE, s=29, alpha=.43,
+               label="同期实测窗口")
+    means = bin_means(train, "nacelle_ms", 3)
+    plot_bins(ax, means, TEAL, "-", "分箱均值与插值曲线")
+    reading_wind = 7.0
+    reading_power = estimate(reading_wind, means)
+    ax.scatter(reading_wind, reading_power, c=AMBER, marker="D", s=57, zorder=3)
+    ax.vlines(reading_wind, 0, reading_power, color=AMBER, linestyle="--")
+    ax.hlines(reading_power, 4, reading_wind, color=AMBER, linestyle="--")
+    ax.annotate("按风速读出估算功率", (reading_wind, reading_power), xytext=(7.2, 650),
+                arrowprops={"arrowstyle": "-", "color": AMBER}, color=AMBER)
+    ax.set(xlim=(4, 9.7), ylim=(0, 2460))
+    axis(ax, "机舱风速（m/s）", "有功功率（kW）", "散点、分箱均值和功率曲线")
+    ax.legend(loc="upper left")
+    save(fig, "power-curve-reading")
+
+
+def energy_gap_reading():
+    fig, ax = panel(6.8, 3.87)
+    positions = np.arange(4)
+    reference = [250, 300, 250, 200]
+    actual = [250, 140, 60, 150]
+    ax.axvspan(.5, 2.5, color="#f8efe9")
+    reference_bars = ax.bar(positions - .18, reference, width=.31, color=BLUE, label="参考电量")
+    actual_bars = ax.bar(positions + .18, actual, width=.31, color=TEAL, label="实发电量")
+    ax.bar_label(reference_bars, padding=3)
+    ax.bar_label(actual_bars, padding=3)
+    ax.set_xticks(positions, ["09:00–10:00", "10:00–11:00", "11:00–12:00", "12:00–13:00"])
+    ax.set_ylim(0, 380)
+    axis(ax, "时段", "电量（kWh）", "按时段对照参考电量与实发电量（示意）")
+    ax.legend(loc="upper right", ncols=2)
+    save(fig, "energy-gap-reading")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--font", type=Path, help="中文字体文件（可选）")
@@ -275,6 +392,12 @@ def main():
     power_curves(train, test)
     weibull_frequency(lidar)
     synchronized_signals(aventa)
+    pitch_reference_reading()
+    pitch_motion_reading()
+    wind_difference_reading(paired)
+    paired_wind_frequency(paired)
+    power_curve_reading(train)
+    energy_gap_reading()
 
 if __name__ == "__main__":
     main()
