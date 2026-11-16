@@ -4,7 +4,7 @@ layout: home
 hero:
   name: 风电数据分析教程
   text: 风机运行监测与性能评估
-  tagline: 从运行记录和公开案例入手，学习筛查变桨异常、对照测风和估算功率。
+  tagline: 用风机运行记录筛查变桨异常、比较两路实测风速，并估算和对照同期发电量。
   image:
     src: /wind-field.webp
     alt: 田野中的风力发电机组
@@ -15,17 +15,17 @@ hero:
 
 features:
   - title: 运行监测与变桨异常筛查
-    details: 建立同工况桨距角参考范围，结合控制信号和告警复核异常。
+    details: 用正常运行记录学出各片叶片通常怎么调，再用实测角度和可取得的辅助信号找偏离。
     link: /pitch
     linkText: 变桨异常筛查
-  - title: 现场测风与风资源分析
-    details: 对照同期测风、验证风速拟合，统计各风速区间的出现频率。
+  - title: 两路实测风速对照
+    details: 对齐机舱和雷达的观测时段，算哪一路读数更高、差多少，再按需要比较风频或验证换算。
     link: /wind-speed
-    linkText: 风速配对与验证
-  - title: 功率曲线与发电评估
-    details: 建立并验证功率曲线，比较机组功率并估算发电量与损失。
-    link: /power
-    linkText: 功率曲线建模
+    linkText: 风速差的计算
+  - title: 风场运行后评估
+    details: 用已测风速估算同期功率和电量，与实测比较，结合运行记录查电量差出现在哪些时段。
+    link: /assessment
+    linkText: 同期电量对照
 ---
 
 <div class="home-reading">
@@ -43,16 +43,20 @@ features:
 [变桨监测](/pitch)
 
   </li>
-  <li><strong>对照测风与功率</strong>
+  <li><strong>算两路测风差异</strong>
 
-[风速拟合](/wind-speed) · [功率曲线](/power)
+[实测风速差](/wind-speed#怎样配对和拟合) · [两路风频](/wind-frequency#两路风频怎么比)
 
   </li>
-  <li><strong>从风频估算电量</strong>
+  <li><strong>估算并对照同期发电量</strong>
 
-[风频与 Weibull](/wind-frequency) · [风场后评估](/assessment)
+[功率曲线](/power) · [风场后评估](/assessment#怎么计算同期电量差)
 
   </li>
 </ol>
+
+## 这些方法怎样用到项目里
+
+先选一台运行记录可用的机组。变桨筛查找出哪片叶片、哪个时段值得复核。测风对照算出同期两路风速差，判断在哪些条件下可以用来估算功率。发电后评估对照同期的参考电量和实发电量，找出差异较大的时段并回查运行记录。先把这三步在一台机组上跑通，再判断哪些方法能用于其他机组。
 
 </div>

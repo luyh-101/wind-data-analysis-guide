@@ -45,13 +45,4 @@ import { withBase } from 'vitepress'
 
 ## 风速–桨距角散点图 {#运行参数图谱}
 
-相似记录在散点图上排成的窄条叫**点带**。同一风速附近出现多个高度不同的桨距角点带，称为**分层**。
-
-Aventa AV-7 是约 6 kW 的小型研究机组，图中绿色为正功率，棕色为零或负功率。点击图可查看原图。它用于概念演示；MW 级机组的具体控制和功率水平需用本机数据确定。
-
-<figure class="tutorial-figure">
-  <a :href="withBase('/figures/aventa-wind-pitch.png')" target="_blank" rel="noopener"><img src="/figures/aventa-wind-pitch.png" width="1020" height="562" loading="lazy" alt="风速–桨距角图框出了低风速的多条角度点带，其中约 39 度的一带有棕色记录。" /></a>
-  <figcaption><strong>风速–桨距角</strong> 低风速下出现多条角度带，约 39° 的点带含零功率记录。这些点带提供了按运行状态分组的线索。</figcaption>
-</figure>
-
-案例数据：<a :href="withBase('/data/aventa-linked-scatter.csv')" download>分钟记录</a> · <a :href="withBase('/data/case-data-notes.txt')" download>数据说明</a> · <a :href="withBase('/data/reproduce-scada-cases.py')" download>复算脚本</a> + <a :href="withBase('/data/aventa-case-input.parquet')" download>Aventa Parquet</a>。来源：Barber、Hammer、Marykovskiy，[Zenodo DOI](https://doi.org/10.5281/zenodo.16738078)，2025-06-04–10，CC BY 4.0。
+把同一条记录的风速和实测桨距角画成一个点，横轴为风速，纵轴为角度。先选同一机组和叶片，把正常发电、启停和限功率分开标记。相近风速下如果出现几条角度点带，就结合转速和工况查看各条带从哪里来，再在可比条件下找偏离。 [怎样建立正常参考](/pitch)
